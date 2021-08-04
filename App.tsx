@@ -9,9 +9,6 @@ const App: React.FC = () => {
     <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
-
-
-
   )
 }
 

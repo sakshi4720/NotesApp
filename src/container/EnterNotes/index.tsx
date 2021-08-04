@@ -1,25 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, SafeAreaView, TextInput, Text, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from './styles';
+import { RootStackParamList } from "../../services/RootNavigator";
+import { RouteProp, useRoute } from "@react-navigation/native";
 
-type RootStackParamList = {
-    Home: { notes: string };
-    EnterNotes: undefined
-}
+const EnterNotes = () => {
 
+    // const route = useRoute<RouteProp<RootStackParamList, "EnterNotes">>()
 
-export interface EnterNotesProps {
-    navigation: StackNavigationProp<RootStackParamList, "Home">
-}
-
-interface State {
-
-}
-
-const EnterNotes: React.FC<EnterNotesProps> = ({ navigation }) => {
-
-    const [txtInpValue, setTxtInpValue] = useState('')
+    const [txtInpValue, setTxtInpValue] = useState<string>('')
 
     return (
         <SafeAreaView style={styles.rootMainContainer}>

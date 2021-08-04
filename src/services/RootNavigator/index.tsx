@@ -5,13 +5,13 @@ import EnterNotes from '../../container/EnterNotes';
 import DetailedNotes from '../../container/DetailedNotes';
 
 
-type RootStackParamList = {
-    Home: undefined;
+export type RootStackParamList = {
+    Home: undefined,
     EnterNotes: undefined;
     DetailedNotes: undefined;
 };
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
 
 interface Props {
 
