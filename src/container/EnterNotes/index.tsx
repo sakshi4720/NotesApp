@@ -1,57 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Button, SafeAreaView, TextInput, Text, View, FlatList } from 'react-native';
-import { StackNavigationProp,  } from '@react-navigation/stack';
+import React, { useState } from "react";
+import { Button, SafeAreaView, TextInput, Text, FlatList } from 'react-native';
+import { StackNavigationProp, } from '@react-navigation/stack';
 import styles from './styles';
 import { RootStackParamList } from "../../services/RootNavigator";
-import { RouteProp, useRoute, useNavigation } from "@react-navigation/native";
-
-
+import { useNavigation } from "@react-navigation/native";
 
 const EnterNotes = () => {
-
     type detailScreenProp = StackNavigationProp<RootStackParamList, 'DetailedNotes'>;
     const navigation = useNavigation<detailScreenProp>();
 
-     const route = useRoute<RouteProp<RootStackParamList, "DetailedNotes">>()
+    // {id : number, value : string}
+    // delete button
+    // Fxn component with types {value, onDeletePress}
+    // make Enter NOtes the first screen
 
     const [notes, setNotes] = useState("")
     const [noteArray, setNoteArray] = useState<Array<string>>([])
 
-    useEffect(() => {
-        () => {
-
-        }
-    })
-
-
-
     const onChangeText = (text: string) => {
         setNotes(text)
-
     }
 
     const onPressAddNoteBtn = () => {
-
         setNoteArray(noteArray => [...noteArray, notes])
         setNotes("")
-
     }
 
     return (
         <SafeAreaView style={styles.rootMainContainer}>
-            <Text style={styles.label}>Enter Notes </Text>
-
             <FlatList
                 data={noteArray}
-                renderItem={({ item }) => <Text style={{ color: "green", padding: 10 }}
+                renderItem={({ item }) => <Text
+                    style={{
+                        color: "green",
+                        padding: 10
+                    }}
                     onPress={() => {
-                        navigation.navigate("DetailedNotes",{
-                            userNotes:item
+                        navigation.navigate("DetailedNotes", {
+                            userNotes: item
                         });
-                    }}>{item}</Text>}
+                    }}
+                >{item}</Text>}
                 keyExtractor={(item) =>
                     item.toString()} />
-
             <TextInput style={styles.txtInputContainer}
                 placeholder={'Enter your text here...'}
                 multiline={false}
