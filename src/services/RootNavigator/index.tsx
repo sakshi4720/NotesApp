@@ -8,7 +8,7 @@ import DetailedNotes from '../../container/DetailedNotes';
 export type RootStackParamList = {
     Home: undefined,
     EnterNotes: undefined;
-    DetailedNotes: undefined;
+    DetailedNotes: {userNotes: string} ;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
