@@ -21,7 +21,14 @@ export default StyleSheet.create({
     },
     txtNotesData: {
         color: "green",
-        padding: 10
+        padding: 10,
+        // flex:1,
+
+    },
+    rootContainerNoteItem: {
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'center'
     }
 
 })

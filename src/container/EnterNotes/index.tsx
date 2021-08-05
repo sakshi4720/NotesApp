@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, SafeAreaView, TextInput, Text, FlatList } from 'react-native';
+import { Button, SafeAreaView, TextInput, Text, FlatList, View, TouchableOpacity, Image } from 'react-native';
 import { StackNavigationProp, } from '@react-navigation/stack';
 import styles from './styles';
 import { RootStackParamList } from "../../services/RootNavigator";
@@ -20,39 +20,51 @@ const EnterNotes = () => {
 
     }
 
-
     type detailScreenProp = StackNavigationProp<RootStackParamList, 'DetailedNotes'>;
     const navigation = useNavigation<detailScreenProp>();
 
+    // const [notes, setNotes] = useState("")
 
-    const [notes, setNotes] = useState("")
-    const [noteArray, setNoteArray] = useState<Note[] | null>(null);
+    const [notes, setNotes] = useState({ id: 0, value: "" })
+    const [noteArray, setNoteArray] = useState([notes])
+
     //const [noteArray, setNoteArray] = useState<Array<string>>([])
 
-
-
     const onChangeText = (text: string) => {
-        setNotes(text)
+        setNotes({ ...notes, id: noteArray.length, value: text })
     }
 
     const onPressAddNoteBtn = () => {
 
-         //setNoteArray(noteArray => [...noteArray,notes]);
+        setNoteArray(noteArray => [...noteArray, notes]);
+        // console.log(noteArray)
         // setNoteArray(noteArray => [...noteArray, notes])
-        setNotes("")
+        setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
-    const renderNotes = ({ item }: { item: Note }) => {
+    const onPressDeleteBtn = (item: Note, index: number) => {
+        let selectedIndex = noteArray.findIndex((element) => { return element.id == item.id })
+        noteArray.splice(selectedIndex, 1)
+        setNotes({ ...notes, id: noteArray.length, value: "" })
+    }
+
+    const renderNotes = ({ item, index }: { item: Note, index: number }) => {
 
         return (
-            <Text
-                style={styles.txtNotesData}
-                onPress={() => {
-                    navigation.navigate("DetailedNotes", {
-                        userNotes: item.toString()
-                    });
-                }}
-            >{item.value}</Text>
+            <View style={styles.rootContainerNoteItem}>
+                <Text
+                    style={styles.txtNotesData}
+                    onPress={() => {
+                        navigation.navigate("DetailedNotes", {
+                            userNotes: item.value
+                        });
+                    }}>{item.value}</Text>
+
+                {item.value !== "" && <TouchableOpacity style={{}}
+                    onPress={() => onPressDeleteBtn(item, index)}>
+                    <Image source={require('../../../assets/images/icon_delete_red.png')} />
+                </TouchableOpacity>}
+            </View>
         )
     }
 
@@ -68,7 +80,7 @@ const EnterNotes = () => {
             <TextInput style={styles.txtInputContainer}
                 placeholder={'Enter your text here...'}
                 multiline={false}
-                value={notes}
+                value={notes.value}
                 onChangeText={text => onChangeText(text)} />
 
             <Button
