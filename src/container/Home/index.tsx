@@ -5,21 +5,21 @@ import styles from "./styles";
 import { RootStackParamList } from "../../services/RootNavigator";
 import { useNavigation } from "@react-navigation/native";
 
-const Home = () => {
+// const Home = () => {
 
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+//     const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
 
-    return (
-        <SafeAreaView style={styles.rootMainContainer}>
-            <TouchableOpacity style={styles.iconAddBtnContainer}
-                onPress={() => {
-                    navigation.navigate("EnterNotes")
-                }}>
-                <Image source={require('../../../assets/images/icon_add_more.png')} />
-            </TouchableOpacity>
-        </SafeAreaView>
-    )
+//     return (
+//         <SafeAreaView style={styles.rootMainContainer}>
+//             <TouchableOpacity style={styles.iconAddBtnContainer}
+//                 onPress={() => {
+//                     navigation.navigate("EnterNotes")
+//                 }}>
+//                 <Image source={require('../../../assets/images/icon_add_more.png')} />
+//             </TouchableOpacity>
+//         </SafeAreaView>
+//     )
 
-}
+// }
 
-export default Home;
+//export default Home;

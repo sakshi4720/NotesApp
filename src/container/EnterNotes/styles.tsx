@@ -8,7 +8,7 @@ export default StyleSheet.create({
         alignItems: 'center'
 
     },
-    label:{
+    label: {
         marginTop: width / 37.5,
     },
     txtInputContainer: {
@@ -18,6 +18,10 @@ export default StyleSheet.create({
         borderWidth: 1,
         marginTop: width / 37.5,
 
+    },
+    txtNotesData: {
+        color: "green",
+        padding: 10
     }
 
 })
