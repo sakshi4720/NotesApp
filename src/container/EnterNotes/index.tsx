@@ -4,21 +4,22 @@ import { StackNavigationProp, } from '@react-navigation/stack';
 import styles from './styles';
 import { RootStackParamList } from "../../services/RootNavigator";
 import { useNavigation } from "@react-navigation/native";
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { startAddNotes, startRemoveNotes } from "../../redux/Actions/Notes"
+import { AppState } from "../../redux/Store/configStore";
 
-// {id : number, value : string}
-// delete button
-// Fxn component with types {value, onDeletePress}
-// make Enter NOtes the first screen
+export interface Note {
 
-const EnterNotes = () => {
+    id?: number;
+    value?: string;
 
+}
 
-    interface Note {
+type Props = LinkStateProps & LinkDispatchProps
 
-        id?: number;
-        value?: string;
+// const dispatch= useDispatch()
 
-    }
+const EnterNotes: React.FC<Props> = () => {
 
     type detailScreenProp = StackNavigationProp<RootStackParamList, 'DetailedNotes'>;
     const navigation = useNavigation<detailScreenProp>();
@@ -43,9 +44,11 @@ const EnterNotes = () => {
     }
 
     const onPressDeleteBtn = (item: Note, index: number) => {
-        let selectedIndex = noteArray.findIndex((element) => { return element.id == item.id })
-        noteArray.splice(selectedIndex, 1)
-        setNotes({ ...notes, id: noteArray.length, value: "" })
+
+
+        // let selectedIndex = noteArray.findIndex((element) => { return element.id == item.id })
+        // noteArray.splice(selectedIndex, 1)
+        // setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
@@ -91,6 +94,21 @@ const EnterNotes = () => {
 
         </SafeAreaView>
     )
+
 }
 
-export default EnterNotes;
+interface LinkStateProps {
+    notes: Note[]
+}
+
+
+interface LinkDispatchProps {
+    startAddNotes: (note: Note) => void
+    startRemoveNotes: (id: number) => void
+}
+
+const mapStateToProps = (state: AppState) => ({
+    note: state.notes
+})
+
+export default connect(mapStateToProps)(EnterNotes);
