@@ -11,5 +11,18 @@ export default StyleSheet.create({
         bottom: width / 5,
         end: width / 15,
         position: 'absolute'
+    },
+    rootItemContainer: {
+        margin: 15,
+        alignItems: 'center',
+        justifyContent:'center'
+        
+    },
+    txtTitle: {
+        fontSize: 18,
+        color: "red"
+    },
+    txtDescription:{
+       
     }
 })
