@@ -11,7 +11,7 @@ import { moderateScale } from "react-native-size-matters";
 
 const Home = () => {
 
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+   // const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
 
     const fetchURL = "https://jsonplaceholder.typicode.com/posts"
 
@@ -52,7 +52,7 @@ const Home = () => {
     const onFABPressed=(selectedOption?: string)=>{
 
         if(selectedOption === 'Questions'){
-            navigation.navigate("EnterNotes")
+            //navigation.navigate("EnterNotes")
             return
         }
 

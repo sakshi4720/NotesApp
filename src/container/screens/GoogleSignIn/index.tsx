@@ -8,10 +8,11 @@ import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../services/RootNavigator";
+import { Log } from '../../../utils/Logger';
 
 const GoogleSignIn = () => {
 
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "EnterNotes">>()
 
     // GoogleSignin.configure({
     //     iosClientId: '550990927312-bce7topq7evl0lvei5ns0boip6qov42t.apps.googleusercontent.com',
@@ -32,11 +33,11 @@ const GoogleSignIn = () => {
 
     const onPressSignInBtn = async() => {
 
-        navigation.navigate('Home')
+        navigation.navigate('EnterNotes')
         // try {
         //     await GoogleSignin.hasPlayServices();
         //     const userInfo = await GoogleSignin.signIn();
-        //     console.log("userInfo==",JSON.stringify(userInfo));
+        //     Log("userInfo==",JSON.stringify(userInfo));
         //   } catch (error) {
         //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         //       // user cancelled the login flow
