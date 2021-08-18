@@ -78,7 +78,7 @@ const EnterNotes: React.FC<Props> = () => {
 
 
         // setNoteArray(noteArray => [...noteArray, notes]);
-        //  setNotes({ ...notes, id: noteArray.length, value: "" })
+          setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
     const onPressDeleteBtn = (item: Note, index: number) => {
