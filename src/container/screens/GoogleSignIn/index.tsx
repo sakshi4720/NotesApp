@@ -32,7 +32,7 @@ const GoogleSignIn = () => {
 
     const onPressSignInBtn = async() => {
 
-       // navigation.navigate('Home')
+        navigation.navigate('Home')
         // try {
         //     await GoogleSignin.hasPlayServices();
         //     const userInfo = await GoogleSignin.signIn();
