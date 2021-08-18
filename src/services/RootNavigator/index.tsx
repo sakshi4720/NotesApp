@@ -9,7 +9,10 @@ import GoogleSignIn from '../../container/screens/GoogleSignIn';
 
 export type RootStackParamList = {
     SplashScreen: undefined,
+<<<<<<< HEAD
     GoogleSignIn: undefined,
+=======
+>>>>>>> 3b4f5643f34e994bec004aefa83220b9a12de032
     Home: undefined,
     EnterNotes: undefined;
     DetailedNotes: { userNotes: string | undefined };
@@ -26,7 +29,10 @@ const RootNavigator: React.FC<Props> = () => {
     return (
         <Navigator initialRouteName="SplashScreen">
             <Screen name="SplashScreen" component={SplashScreen} />
+<<<<<<< HEAD
             <Screen name="GoogleSignIn" component={GoogleSignIn} />
+=======
+>>>>>>> 3b4f5643f34e994bec004aefa83220b9a12de032
             <Screen name="Home" component={Home} />
             <Screen name="EnterNotes" component={EnterNotes} />
             <Screen name="DetailedNotes" component={DetailedNotes} />
