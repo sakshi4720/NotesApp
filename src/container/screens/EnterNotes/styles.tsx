@@ -49,6 +49,11 @@ export default StyleSheet.create({
        width:moderateScale(345),
        height:moderateScale(65),
        justifyContent: 'center',
+      },
+      addIconContainer:{
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center'
       }
 
 })

@@ -4,11 +4,11 @@ import splashScreen from 'react-native-splash-screen';
 import { useNavigation } from '@react-navigation/native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../services/RootNavigator';
-import Home from '../Home'
+import { RootStackParamList } from '../../../services/RootNavigator';
+
 
 const SplashScreen = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "GoogleSignIn">>()
 
   useEffect(() => {
 
@@ -17,7 +17,7 @@ const SplashScreen = () => {
     setTimeout(() => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home' }],
+        routes: [{ name: 'GoogleSignIn' }],
       });
       console.log('spalsh')
       splashScreen.hide();
