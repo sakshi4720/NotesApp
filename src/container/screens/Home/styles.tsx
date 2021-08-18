@@ -15,14 +15,15 @@ export default StyleSheet.create({
     rootItemContainer: {
         margin: 15,
         alignItems: 'center',
-        justifyContent:'center'
-        
+        justifyContent: 'center'
+
     },
     txtTitle: {
         fontSize: 18,
-        color: "red"
+        color: "red",
+        fontFamily: 'ProductSans-BoldItalic'
     },
-    txtDescription:{
-       
+    txtDescription: {
+
     }
 })

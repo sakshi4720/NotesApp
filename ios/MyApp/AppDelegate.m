@@ -54,6 +54,15 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
+  
+  for (NSString* family in [UIFont familyNames])
+   {
+     NSLog(@"%@", family);
+     for (NSString* name in [UIFont fontNamesForFamilyName: family])
+     {
+       NSLog(@" %@", name);
+     }
+   }
   return YES;
 }
 

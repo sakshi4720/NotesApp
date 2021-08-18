@@ -66,5 +66,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ProductSans400.ttf</string>
+		<string>ProductSansBold700.ttf</string>
+		<string>ProductSansBoldItalic700.ttf</string>
+		<string>ProductSansItalic400.ttf</string>
+	</array>
 </dict>
 </plist>
