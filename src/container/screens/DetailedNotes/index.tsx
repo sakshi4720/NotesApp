@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, } from 'react-native';
 import styles from './styles';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from "../../../services/RootNavigator";
@@ -7,7 +7,6 @@ import { RootStackParamList } from "../../../services/RootNavigator";
 interface Props {
 
 }
-
 
 const DetailedNotes: React.FC<Props> = () => {
 
