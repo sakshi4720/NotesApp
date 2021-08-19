@@ -1,4 +1,4 @@
-import { Note } from "../../container/EnterNotes";
+import { Note } from "../../container/screens/EnterNotes";
 import { NotesActionTypes } from "../ActionConstants";
 
 const notesReducerDefaultState: Note[] | null = [];

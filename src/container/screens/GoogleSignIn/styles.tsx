@@ -7,31 +7,32 @@ export default StyleSheet.create({
     rootMainContainer: {
         flex: 1,
         alignItems: 'center',
-       
+
     },
     rootInnerContainer: {
-        width: '90%',
-        marginTop: moderateScale(30),
-        flex:1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     linearGradient: {
-        height:moderateScale(65),
-        width:moderateScale(345),
+        height: moderateScale(65),
+        width: moderateScale(333),
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom:moderateScale(25),
-       
-       },
-       buttonText: {
-         fontSize:22,
-         textAlign: 'center',
-         color: '#ffffff',
-         backgroundColor: 'transparent',
-       },
- 
-       btnAddContainer:{
-        width:moderateScale(345),
-        height:moderateScale(65),
+        //marginBottom:moderateScale(25),
+        alignSelf: 'center'
+
+    },
+    buttonText: {
+        fontSize: 22,
+        textAlign: 'center',
+        color: '#ffffff',
+        backgroundColor: 'transparent',
+    },
+
+    btnAddContainer: {
+        width: moderateScale(345),
+        height: moderateScale(65),
         justifyContent: 'center',
-       },
+    },
 })

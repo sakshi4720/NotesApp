@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Note } from "../../container/EnterNotes";
+import { Note } from "../../container/screens/EnterNotes";
 import { AppActions } from "../ActionConstants";
 import { AppState } from "../Store/configStore";
 

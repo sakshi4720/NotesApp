@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../services/RootNavigator";
 import { Log } from '../../../utils/Logger';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const GoogleSignIn = () => {
 
@@ -34,6 +35,7 @@ const GoogleSignIn = () => {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         // play services not available or outdated
       } else {
+        crashlytics().crash()
         // some other error happened
       }
     }
@@ -42,12 +44,15 @@ const GoogleSignIn = () => {
   return (
     <SafeAreaView style={styles.rootMainContainer}>
 
-      <LinearGradient colors={['#FF6700', '#FFA500']} style={styles.linearGradient}>
+     <View style={styles.rootInnerContainer}>
+     <LinearGradient colors={['#FF6700', '#FFA500']} style={styles.linearGradient}>
         <TouchableOpacity style={styles.btnAddContainer}
           onPress={() => { onPressSignInBtn() }}>
           <Text style={styles.buttonText}>Sign in with Google</Text>
         </TouchableOpacity>
       </LinearGradient>
+
+     </View>
 
     </SafeAreaView>
   )
