@@ -30,6 +30,7 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
+    "redux-persist": "^6.0.0",
     "rn-material-ui-textfield": "^1.0.5"
   },
   "devDependencies": {

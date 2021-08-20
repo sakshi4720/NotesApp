@@ -13,6 +13,7 @@ import { firebase } from "@react-native-firebase/firestore"
 import CustomTabCardComponent from '../../reuse/CustomTabCardComponent';
 
 
+
 export interface Note {
 
     id?: number;
@@ -22,12 +23,13 @@ export interface Note {
 
 type Props = LinkStateProps & LinkDispatchProps
 
-// const dispatch= useDispatch()
+//const dispatch = useDispatch();
 
 const EnterNotes: React.FC<Props> = () => {
 
     type detailScreenProp = StackNavigationProp<RootStackParamList, 'DetailedNotes'>;
     const navigation = useNavigation<detailScreenProp>();
+    //const {} = useSelector((state: AppState) => state.notesReducer);
 
     // const [notes, setNotes] = useState("")
 
@@ -63,11 +65,7 @@ const EnterNotes: React.FC<Props> = () => {
             });
         }
 
-        firebase.firestore().collection('userNotes').add({
-            id: notes.id,
-            value: notes.value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
+       
 
         firebase.firestore().collection('userNotes').doc().set(notes).then(() => {
             setNoteArray(noteArray => [...noteArray, notes]);
@@ -83,6 +81,11 @@ const EnterNotes: React.FC<Props> = () => {
         let selectedIndex = noteArray.findIndex((element) => { return element.id == item.id })
         noteArray.splice(selectedIndex, 1)
         setNotes({ ...notes, id: noteArray.length, value: "" })
+    }
+
+
+    const onPressLogoutBtn = () => {
+
     }
 
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
@@ -117,6 +120,13 @@ const EnterNotes: React.FC<Props> = () => {
                 <TouchableOpacity style={styles.btnAddContainer}
                     onPress={() => { onPressAddNoteBtn() }}>
                     <Text style={styles.buttonText}>Add</Text>
+                </TouchableOpacity>
+            </LinearGradient>
+
+            <LinearGradient colors={['#FF6700', '#FFA500']} style={styles.linearGradient}>
+                <TouchableOpacity style={styles.btnAddContainer}
+                    onPress={() => { onPressLogoutBtn() }}>
+                    <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
             </LinearGradient>
 

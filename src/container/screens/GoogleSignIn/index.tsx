@@ -11,6 +11,12 @@ import { RootStackParamList } from "../../../services/RootNavigator";
 import { Log } from '../../../utils/Logger';
 import crashlytics from '@react-native-firebase/crashlytics';
 
+export interface UserTokenInfo {
+
+   token?: string;
+
+}
+
 const GoogleSignIn = () => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList, "EnterNotes">>()
@@ -26,7 +32,8 @@ const GoogleSignIn = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      Log("userInfo==", JSON.stringify(userInfo));
+      //Log("userInfo==", JSON.stringify(userInfo));
+      navigation.navigate('EnterNotes')
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow

@@ -2,6 +2,36 @@ import { Dispatch } from "redux";
 import { Note } from "../../container/screens/EnterNotes";
 import { AppActions } from "../ActionConstants";
 import { AppState } from "../Store/configStore";
+import { firebase } from "@react-native-firebase/firestore"
+import { UserTokenInfo } from "../../container/screens/GoogleSignIn";
+
+export const updateUserDataAndToken = (payload: UserTokenInfo): AppActions => {
+    return {
+        type: "UPDATE_USER_DATA_AND_TOKEN",
+        payload
+    }
+}
+
+export const updateUserToken = (token: string): AppActions => {
+    return {
+        type: "UPDATE_USER_TOKEN",
+        token
+    }
+}
+
+export const updateUserData = (payload: UserTokenInfo): AppActions => {
+    return {
+        type: "UPDATE_USER_DATA",
+        payload
+    }
+}
+
+export const resetUserInfo= (payload: UserTokenInfo): AppActions => {
+    return {
+        type: "RESET_USER_DATA",
+        payload
+    }
+}
 
 
 export const addNotes = (note: Note): AppActions => ({
@@ -21,6 +51,12 @@ export const startAddNotes = (notesData: {
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
         const { id = 0, value = "" } = notesData;
 
+        firebase.firestore().collection('userNotes').add({
+            id: notesData.id,
+            value: notesData.value,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
         const note = { id, value };
 
         dispatch(
@@ -28,6 +64,8 @@ export const startAddNotes = (notesData: {
                 ...note,
                 id
             })
+
+           
         )
     }
 }
