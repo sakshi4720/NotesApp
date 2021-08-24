@@ -13,7 +13,7 @@ import { getIcons } from '../../../../assets/images/icons'
 import { Note } from '../../screens/EnterNotes';
 
 
-const CustomTabCardComponent = ({ userNotesObj, }: { userNotesObj: Note, }) => {
+const CustomTabCardComponent = ({ userNotesObj,onPressDeleteBtn }: { userNotesObj: Note,onPressDeleteBtn:()=>void }) => {
 
     return (
         <View style={{ marginBottom: moderateScale(20) }}>
@@ -32,7 +32,7 @@ const CustomTabCardComponent = ({ userNotesObj, }: { userNotesObj: Note, }) => {
                     </View>
 
                     <TouchableOpacity style={styles.deleteBtnContainer}
-                    //onPress={onPressDeleteBtn}
+                   onPress={onPressDeleteBtn}
                     >
                         <Image source={require('../../../../assets/images/icon_delete_red.png')} />
                     </TouchableOpacity>

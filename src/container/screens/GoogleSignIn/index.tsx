@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text, SafeAreaView, View } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { TextField } from 'rn-material-ui-textfield';
 import styles from './styles';
 
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../services/RootNavigator";
-import { Log } from '../../../utils/Logger';
 import { updateUserToken, } from '../../../redux/Actions/UserDataToken';
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../redux/Store/configStore";
@@ -30,7 +28,6 @@ const GoogleSignIn = () => {
   });
 
   const dispatch = useDispatch()
-
 
   const onPressSignInBtn = async () => {
     //let response = await SocialLogin()

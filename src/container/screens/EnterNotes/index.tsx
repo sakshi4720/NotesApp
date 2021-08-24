@@ -64,7 +64,7 @@ const EnterNotes: React.FC<Props> = () => {
         }
 
         dispatch(startAddNotes)
-        
+
         setNoteArray(noteArray => [...noteArray, notes]);
 
         setNotes({ ...notes, id: noteArray.length, value: "" })
@@ -90,7 +90,8 @@ const EnterNotes: React.FC<Props> = () => {
 
         return (
 
-            <CustomTabCardComponent userNotesObj={item} />
+            <CustomTabCardComponent userNotesObj={item}
+                onPressDeleteBtn={() => onPressDeleteBtn(item, index)} />
         )
     }
 
