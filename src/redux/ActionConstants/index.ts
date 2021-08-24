@@ -11,33 +11,39 @@ export const RESET_USER_DATA = "RESET_USER_DATA"
 
 export interface UpdateUserDataAndToken {
     type: typeof UPDATE_USER_DATA_AND_TOKEN,
-    payload:UserTokenInfo
+    payload: UserTokenInfo
 
 }
 
 export interface UpdateUserToken {
     type: typeof UPDATE_USER_TOKEN,
-    token:string
+    token: string
 }
 
 export interface UpdateUserData {
     type: typeof UPDATE_USER_DATA,
-    payload:UserTokenInfo
+    payload: UserTokenInfo
 
 }
 
 export interface ResetUserInfo {
     type: typeof RESET_USER_DATA,
-    payload:UserTokenInfo
+    // token:string
 }
 
 
 // EnterNotes Screen
 export const ADD_NOTES = "ADD_NOTES"
+export const SET_NOTES = "SET_NOTES"
 export const REMOVE_NOTES = "REMOVE_NOTES"
 
 export interface AddNotesAction {
     type: typeof ADD_NOTES;
+    note: Note;
+}
+
+export interface SetNotesAction {
+    type: typeof SET_NOTES;
     note: Note;
 }
 
@@ -48,6 +54,6 @@ export interface RemoveNotesAction {
 
 export type UserTokenAndDataActionTypes = UpdateUserDataAndToken | UpdateUserToken | UpdateUserData | ResetUserInfo
 
-export type NotesActionTypes = AddNotesAction | RemoveNotesAction
+export type NotesActionTypes = AddNotesAction | RemoveNotesAction | SetNotesAction
 
 export type AppActions = UserTokenAndDataActionTypes | NotesActionTypes

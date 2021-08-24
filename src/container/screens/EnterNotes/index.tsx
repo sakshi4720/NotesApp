@@ -11,6 +11,8 @@ import { addNoteValidationType, validateAddNote } from "../../../utils/Validate"
 import { getIcons } from '../../../../assets/images/icons'
 import { firebase } from "@react-native-firebase/firestore"
 import CustomTabCardComponent from '../../reuse/CustomTabCardComponent';
+import { resetUserInfo } from "../../../redux/Actions/UserDataToken";
+import { setAddedNotes, startAddNotes } from "../../../redux/Actions/Notes";
 
 
 
@@ -23,21 +25,17 @@ export interface Note {
 
 type Props = LinkStateProps & LinkDispatchProps
 
-//const dispatch = useDispatch();
-
 const EnterNotes: React.FC<Props> = () => {
+
+    const dispatch = useDispatch()
 
     type detailScreenProp = StackNavigationProp<RootStackParamList, 'DetailedNotes'>;
     const navigation = useNavigation<detailScreenProp>();
-    //const {} = useSelector((state: AppState) => state.notesReducer);
-
-    // const [notes, setNotes] = useState("")
 
     const [notes, setNotes] = useState({ id: 0, value: "" })
     const [noteArray, setNoteArray] = useState([notes])
     const [error, setError] = useState<addNoteValidationType>({})
 
-    //const [noteArray, setNoteArray] = useState<Array<string>>([])
 
     const getNotesData = async () => {
         //var list = await firebase.firestore().collection('userNotes').orderBy('createdAt').get()
@@ -65,14 +63,10 @@ const EnterNotes: React.FC<Props> = () => {
             });
         }
 
-       
+        dispatch(startAddNotes)
+        
+        setNoteArray(noteArray => [...noteArray, notes]);
 
-        firebase.firestore().collection('userNotes').doc().set(notes).then(() => {
-            setNoteArray(noteArray => [...noteArray, notes]);
-        })
-
-
-        // setNoteArray(noteArray => [...noteArray, notes]);
         setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
@@ -84,7 +78,10 @@ const EnterNotes: React.FC<Props> = () => {
     }
 
 
+
     const onPressLogoutBtn = () => {
+        dispatch(resetUserInfo());
+        navigation.goBack()
 
     }
 

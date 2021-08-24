@@ -21,8 +21,7 @@ const userDataTokenReducer = (state = INITIAL_STATE, action: UserTokenAndDataAct
             return { ...state, ...action.payload }
 
         case "RESET_USER_DATA":
-            return { ...state, ...action.payload }
-
+            return INITIAL_STATE;
         default:
             return state;
     }

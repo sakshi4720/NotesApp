@@ -10,6 +10,11 @@ export const addNotes = (note: Note): AppActions => ({
     note
 });
 
+export const setNotes = (note: Note): AppActions => ({
+    type: "SET_NOTES",
+    note
+});
+
 export const removeNotes = (id: number): AppActions => ({
     type: "REMOVE_NOTES",
     id
@@ -23,6 +28,33 @@ export const startAddNotes = (notesData: {
         const { id = 0, value = "" } = notesData;
 
         firebase.firestore().collection('userNotes').add({
+            id: notesData.id,
+            value: notesData.value,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
+        const note = { id, value };
+
+        dispatch(
+            addNotes({
+                ...note,
+                id
+            })
+
+           
+        )
+    }
+}
+
+export const setAddedNotes = (notesData: {
+    id: number,
+    value: string
+}) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+        const { id = 0, value = "" } = notesData;
+
+    
+        firebase.firestore().collection('userNotes').doc().set({
             id: notesData.id,
             value: notesData.value,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()

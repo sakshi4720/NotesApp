@@ -27,10 +27,10 @@ export const updateUserData = (payload: UserTokenInfo): AppActions => {
     }
 }
 
-export const resetUserInfo= (payload: UserTokenInfo): AppActions => {
+export const resetUserInfo= (): AppActions => {
     return {
         type: "RESET_USER_DATA",
-        payload
+        
     }
 }
 
@@ -40,6 +40,13 @@ export const updateUserTokenAction = (token:string) => {
         dispatch(updateUserToken(token));
     }
 }
+
+export const logoutUserAction = (token:string) => {
+    return (dispatch: Dispatch<AppActions>, state: () => AppState)=>{
+        dispatch(resetUserInfo());
+    }
+}
+
 
 
 

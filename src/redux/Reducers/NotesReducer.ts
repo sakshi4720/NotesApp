@@ -9,6 +9,9 @@ const notesReducer = (state = notesReducerDefaultState, action: NotesActionTypes
         case "ADD_NOTES":
             return [...state, action.note];
 
+        case "SET_NOTES":
+            return [...state, action.note];
+
         case "REMOVE_NOTES":
             return state.filter(({ id }) => id !== action.id);
 
