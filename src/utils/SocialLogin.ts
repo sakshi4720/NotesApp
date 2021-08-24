@@ -1,11 +1,14 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-
+import { updateUserToken, } from '../redux/Actions/UserDataToken';
+import { useDispatch,  } from "react-redux";
 export const SocialLogin = async () => {
 
 try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    // dispatch(updateUserToken(userInfo.idToken))
+
+    return userInfo;
+    
     // navigation.navigate('EnterNotes')
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {

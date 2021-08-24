@@ -33,7 +33,7 @@ const GoogleSignIn = () => {
 
 
   const onPressSignInBtn = async () => {
-   
+    //let response = await SocialLogin()
     if (userToken) {
       navigation.navigate('EnterNotes')
     } else {

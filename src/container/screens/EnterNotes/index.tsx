@@ -91,7 +91,6 @@ const EnterNotes: React.FC<Props> = () => {
         return (
 
             <CustomTabCardComponent userNotesObj={item} />
-
         )
     }
 
