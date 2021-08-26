@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Flash Study</string>
+    <string name="app_name">MyApp</string>
+    <string name="server_client_id">550990927312-vhckppeoks7scstsb5bcdtif2srpr4sv.apps.googleusercontent.com</string>
 </resources>
