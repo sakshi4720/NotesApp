@@ -35,9 +35,9 @@ const GoogleSignIn = () => {
       navigation.navigate('EnterNotes')
     } else {
       try {
-//        await GoogleSignin.hasPlayServices();
+       await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
-        console.log(JSON.stringify(userInfo))
+      
         dispatch(updateUserToken(userInfo.idToken))
         navigation.navigate('EnterNotes')
       } catch (error) {
