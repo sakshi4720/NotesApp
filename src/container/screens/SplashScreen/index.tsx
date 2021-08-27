@@ -8,7 +8,7 @@ import { RootStackParamList } from '../../../services/RootNavigator';
 
 
 const SplashScreen = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "GoogleSignIn">>()
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Notes">>()
 
   useEffect(() => {
 
@@ -17,9 +17,8 @@ const SplashScreen = () => {
     setTimeout(() => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'GoogleSignIn' }],
+        routes: [{ name: 'Notes' }],
       });
-      console.log('spalsh')
       splashScreen.hide();
     }, 100);
   }, []);

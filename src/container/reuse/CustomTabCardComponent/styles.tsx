@@ -9,13 +9,10 @@ export default StyleSheet.create({
     alignItems: 'center',
 
   },
-  itemMainConatiner: {
-    // flexDirection: "row",
+
+  linearGradientContainer:{
     paddingLeft: moderateScale(20),
-    //paddingRight: ConstantManager.VALUE_20,
     paddingBottom: moderateScale(10),
-    backgroundColor: 'white',
-    // height:ConstantManager.VALUE_120,
     width: moderateScale(333),
     alignSelf: 'center',
     borderRadius: moderateScale(10),
@@ -26,6 +23,9 @@ export default StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
 
+  },
+  itemMainConatiner: {
+   
   },
 
   itemImg: {
@@ -46,9 +46,10 @@ export default StyleSheet.create({
   txtItemDescription: {
     marginTop: moderateScale(5),
     fontSize: moderateScale(12),
-    color: 'gray',
+    color: 'white',
     maxWidth: moderateScale(168),
     lineHeight: moderateScale(15),
+    fontFamily:'ProductSans-Bold',
     flex: 1
 
   },

@@ -21,7 +21,7 @@ const GoogleSignIn = () => {
 
   const userToken = useSelector((state: AppState) => state.persistedReducer.token)
 
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, "EnterNotes">>()
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Notes">>()
 
   GoogleSignin.configure({
     webClientId: '550990927312-bce7topq7evl0lvei5ns0boip6qov42t.apps.googleusercontent.com',
@@ -30,16 +30,20 @@ const GoogleSignIn = () => {
   const dispatch = useDispatch()
 
   const onPressSignInBtn = async () => {
+
+    navigation.navigate('Notes')
+
+    return
     //let response = await SocialLogin()
     if (userToken) {
-      navigation.navigate('EnterNotes')
+      navigation.navigate('Notes')
     } else {
       try {
-       await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignin.signIn();
+      //  await GoogleSignin.hasPlayServices();
+      //   const userInfo = await GoogleSignin.signIn();
       
-        dispatch(updateUserToken(userInfo.idToken))
-        navigation.navigate('EnterNotes')
+      //   dispatch(updateUserToken(userInfo.idToken))
+     
       } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
           // user cancelled the login flow

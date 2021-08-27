@@ -11,35 +11,44 @@ import { moderateScale } from 'react-native-size-matters';
 import styles from './styles';
 import { getIcons } from '../../../../assets/images/icons'
 import { Note } from '../../screens/EnterNotes';
+import LinearGradient from "react-native-linear-gradient";
+import { getRandomColors } from '../../../utils/Common';
 
 
-const CustomTabCardComponent = ({ userNotesObj,onPressDeleteBtn }: { userNotesObj: Note,onPressDeleteBtn:()=>void }) => {
+const CustomTabCardComponent = ({ userNotesObj, onPressDeleteBtn }: { userNotesObj: Note, onPressDeleteBtn: () => void }) => {
 
     return (
         <View style={{ marginBottom: moderateScale(20) }}>
 
-            <TouchableOpacity style={styles.itemMainConatiner}
-                activeOpacity={0}
-            >
+            <LinearGradient style={styles.linearGradientContainer}
+                colors={getRandomColors()}>
 
-                <TouchableOpacity style={styles.addBtnContainer}>
-                    {getIcons("AddIcon", 25)}
+                <TouchableOpacity style={styles.itemMainConatiner}
+                    activeOpacity={0}
+                >
 
-                    <View style={styles.dataInfoContainer}>
+                    <TouchableOpacity style={styles.addBtnContainer}>
+                        {getIcons("AddIcon", 25)}
 
-                        <Text style={styles.txtItemDescription}>{userNotesObj.value}</Text>
+                        <View style={styles.dataInfoContainer}>
 
-                    </View>
+                            <Text style={styles.txtItemDescription}>{userNotesObj.value}</Text>
 
-                    <TouchableOpacity style={styles.deleteBtnContainer}
-                   onPress={onPressDeleteBtn}
-                    >
-                        <Image source={require('../../../../assets/images/icon_delete_red.png')} />
+                        </View>
+
+                        <TouchableOpacity style={styles.deleteBtnContainer}
+                            onPress={onPressDeleteBtn}
+                        >
+                            <Image source={require('../../../../assets/images/icon_delete_red.png')} />
+                        </TouchableOpacity>
+
                     </TouchableOpacity>
 
                 </TouchableOpacity>
 
-            </TouchableOpacity>
+
+            </LinearGradient>
+
 
         </View>
     );

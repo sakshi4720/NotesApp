@@ -38,8 +38,7 @@ const EnterNotes: React.FC<Props> = () => {
 
 
     const getNotesData = async () => {
-        //var list = await firebase.firestore().collection('userNotes').orderBy('createdAt').get()
-
+     
     }
 
     useEffect(() => {
@@ -66,7 +65,6 @@ const EnterNotes: React.FC<Props> = () => {
         dispatch(startAddNotes)
 
         setNoteArray(noteArray => [...noteArray, notes]);
-
         setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
@@ -77,17 +75,7 @@ const EnterNotes: React.FC<Props> = () => {
         setNotes({ ...notes, id: noteArray.length, value: "" })
     }
 
-
-
-    const onPressLogoutBtn = () => {
-        dispatch(resetUserInfo());
-        navigation.goBack()
-
-    }
-
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
-
-
         return (
 
             <CustomTabCardComponent userNotesObj={item}
@@ -104,6 +92,7 @@ const EnterNotes: React.FC<Props> = () => {
                 keyExtractor={(item) =>
                     item.toString()} /> : <View style={styles.addIconContainer}>
                 {getIcons("AddIcon")}
+                <Text style={styles.txtNoNotesFound}>No Notes Found</Text>
             </View>}
 
             <TextInput style={styles.txtInputContainer}
@@ -117,13 +106,6 @@ const EnterNotes: React.FC<Props> = () => {
                 <TouchableOpacity style={styles.btnAddContainer}
                     onPress={() => { onPressAddNoteBtn() }}>
                     <Text style={styles.buttonText}>Add</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-
-            <LinearGradient colors={['#FF6700', '#FFA500']} style={styles.linearGradient}>
-                <TouchableOpacity style={styles.btnAddContainer}
-                    onPress={() => { onPressLogoutBtn() }}>
-                    <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
             </LinearGradient>
 
