@@ -9,13 +9,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import styles from './styles';
-import { getIcons } from '../../../../assets/images/icons'
 import { Note } from '../../screens/EnterNotes';
 import LinearGradient from "react-native-linear-gradient";
 import { getRandomColors } from '../../../utils/Common';
 
 
-const CustomTabCardComponent = ({ userNotesObj, onPressDeleteBtn }: { userNotesObj: Note, onPressDeleteBtn: () => void }) => {
+const CustomTabCardComponent = ({ userNotesObj }: { userNotesObj: Note }) => {
 
     return (
         <View style={{ marginBottom: moderateScale(20) }}>
@@ -28,7 +27,6 @@ const CustomTabCardComponent = ({ userNotesObj, onPressDeleteBtn }: { userNotesO
                 >
 
                     <TouchableOpacity style={styles.addBtnContainer}>
-                        {getIcons("AddIcon", 25)}
 
                         <View style={styles.dataInfoContainer}>
 
@@ -36,19 +34,12 @@ const CustomTabCardComponent = ({ userNotesObj, onPressDeleteBtn }: { userNotesO
 
                         </View>
 
-                        <TouchableOpacity style={styles.deleteBtnContainer}
-                            onPress={onPressDeleteBtn}
-                        >
-                            <Image source={require('../../../../assets/images/icon_delete_red.png')} />
-                        </TouchableOpacity>
-
                     </TouchableOpacity>
 
                 </TouchableOpacity>
 
 
             </LinearGradient>
-
 
         </View>
     );

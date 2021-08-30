@@ -66,6 +66,23 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'ProductSans-Bold',
         fontWeight:'bold'
-    }
+    },
+    rowBack: {
+        alignItems: 'center',
+        //backgroundColor: 'red',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+         
+    },
+    swiperListViewContainer:{
+        marginTop: moderateScale(20)
+    },
+    deleteBtnContainer: {
+        // flexDirection: 'row',
+        // justifyContent: 'flex-end',
+        // alignItems: 'center',
+        marginStart: moderateScale(20)
+      },
 
 })

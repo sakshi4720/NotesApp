@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, TextInput, Text, FlatList, View, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, TextInput, Text, FlatList, View, TouchableOpacity, Alert, Image } from 'react-native';
 import { StackNavigationProp, } from '@react-navigation/stack';
 import styles from './styles';
 import { RootStackParamList } from "../../../services/RootNavigator";
 import { useNavigation } from "@react-navigation/native";
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { AppState } from "../../../redux/Store/configStore";
 import LinearGradient from "react-native-linear-gradient";
 import { addNoteValidationType, validateAddNote } from "../../../utils/Validate";
 import { getIcons } from '../../../../assets/images/icons'
-import { firebase } from "@react-native-firebase/firestore"
 import CustomTabCardComponent from '../../reuse/CustomTabCardComponent';
-import { resetUserInfo } from "../../../redux/Actions/UserDataToken";
 import { setAddedNotes, startAddNotes } from "../../../redux/Actions/Notes";
-
+import { SwipeListView } from "react-native-swipe-list-view";
 
 
 export interface Note {
@@ -23,9 +21,9 @@ export interface Note {
 
 }
 
-type Props = LinkStateProps & LinkDispatchProps
 
-const EnterNotes: React.FC<Props> = () => {
+
+const EnterNotes = () => {
 
     const dispatch = useDispatch()
 
@@ -38,7 +36,7 @@ const EnterNotes: React.FC<Props> = () => {
 
 
     const getNotesData = async () => {
-     
+
     }
 
     useEffect(() => {
@@ -78,19 +76,28 @@ const EnterNotes: React.FC<Props> = () => {
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
         return (
 
-            <CustomTabCardComponent userNotesObj={item}
-                onPressDeleteBtn={() => onPressDeleteBtn(item, index)} />
+            <CustomTabCardComponent userNotesObj={item} />
         )
     }
 
     return (
         <SafeAreaView style={styles.rootMainContainer}>
-            {noteArray.length > 1 ? <FlatList
-                style={{ marginTop: 20 }}
+
+            {noteArray.length > 1 ? <SwipeListView
+                style={styles.swiperListViewContainer}
                 data={noteArray}
                 renderItem={renderNotes}
-                keyExtractor={(item) =>
-                    item.toString()} /> : <View style={styles.addIconContainer}>
+                renderHiddenItem={(data, rowMap) => (
+                    <View style={styles.rowBack}>
+                        <TouchableOpacity style={styles.deleteBtnContainer}
+                            onPress={() => onPressDeleteBtn(data.item, data.index)}>
+                            <Image source={require('../../../../assets/images/icon_delete_red.png')} />
+                        </TouchableOpacity>
+                    </View>
+                )}
+                leftOpenValue={0}
+                rightOpenValue={-40}
+            /> : <View style={styles.addIconContainer}>
                 {getIcons("AddIcon")}
                 <Text style={styles.txtNoNotesFound}>No Notes Found</Text>
             </View>}
@@ -114,18 +121,4 @@ const EnterNotes: React.FC<Props> = () => {
 
 }
 
-interface LinkStateProps {
-    notes: Note[]
-}
-
-
-interface LinkDispatchProps {
-    startAddNotes: (note: Note) => void
-    startRemoveNotes: (id: number) => void
-}
-
-const mapStateToProps = (state: AppState) => ({
-    note: state.notes
-})
-
-export default connect(mapStateToProps)(EnterNotes);
+export default EnterNotes;
