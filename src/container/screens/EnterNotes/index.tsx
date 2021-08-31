@@ -76,9 +76,9 @@ const EnterNotes = () => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.rootMainContainer}>
 
-                <Header />
+                <Header headerTitle={'Notes'} onBackPress={() => navigation.goBack()}/>
 
-                {noteArray.length > 0 ? <SwipeListView
+                {/* {noteArray.length > 0 ? <SwipeListView
                     style={styles.swiperListViewContainer}
                     data={noteArray}
                     renderItem={renderNotes}
@@ -97,21 +97,27 @@ const EnterNotes = () => {
                 /> : <View style={styles.addIconContainer}>
                     {getIcons("AddIcon")}
                     <Text style={styles.txtNoNotesFound}>No Notes Found</Text>
-                </View>}
+                </View>} */}
 
                 <TextInput style={styles.txtInputContainer}
                     placeholder={'Enter your text here...'}
-                    multiline={false}
+                    multiline={true}
                     value={notes.value}
                     onChangeText={text => onChangeText(text)} />
 
 
-                <LinearGradient colors={['#ADD8E6', '#728FCE']} style={styles.linearGradient}>
-                    <TouchableOpacity style={styles.btnAddContainer}
-                        onPress={() => { onPressAddNoteBtn() }}>
-                        <Text style={styles.buttonText}>Add</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' ,marginTop:25,marginStart:15,justifyContent:'space-between',marginEnd:15,}}>
+                    <LinearGradient colors={['#ADD8E6', '#728FCE']} style={styles.linearGradient}>
+                        <TouchableOpacity style={styles.btnAddContainer}
+                            onPress={() => { onPressAddNoteBtn() }}>
+                            <Text style={styles.buttonText}>Add</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+
+                    <TouchableOpacity style={styles.addImg}>
+                        <Image source={require('../../../../assets/images/ic_add_notes.png')} />
                     </TouchableOpacity>
-                </LinearGradient>
+                </View>
 
             </SafeAreaView>
 

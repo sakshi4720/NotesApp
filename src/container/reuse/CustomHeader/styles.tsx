@@ -25,5 +25,12 @@ export default StyleSheet.create({
     rightImageContainer: {
         end: moderateScale(15),
         position: 'absolute'
+    },
+    backIconContainer:{
+        start: moderateScale(15),
+        position: 'absolute',
+        height:40,
+        width:40,
+        justifyContent:'center'
     }
 })

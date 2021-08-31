@@ -6,20 +6,22 @@ export default StyleSheet.create({
 
     rootMainContainer: {
         flex: 1,
-        alignItems: 'center'
+        //alignItems: 'center'
 
     },
     label: {
         marginTop: width / 37.5,
     },
     txtInputContainer: {
-        height: height / 12,
+        height: moderateScale(150),
         width: moderateScale(333),
-        padding: width / 37.5,
+        padding:moderateScale(8),
         borderWidth: 1,
-        marginTop: width / 37.5,
+        marginTop:moderateScale(30),
         borderRadius: moderateScale(10),
-        borderColor:'#ADD8E6'
+        borderColor:'#ADD8E6',
+        marginStart:moderateScale(15)
+        
 
     },
     txtNotesData: {
@@ -33,14 +35,15 @@ export default StyleSheet.create({
     },
     linearGradient: {
         height: moderateScale(65),
-        width: moderateScale(333),
+        width: moderateScale(260),
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: moderateScale(25),
-        marginBottom: Platform.OS == "android" ? moderateScale(25) : moderateScale(10),
+       
+      
         borderRadius: moderateScale(10),
         borderWidth: 1,
-        borderColor: 'transparent'
+        borderColor: 'transparent',
+        
     },
     buttonText: {
         fontSize: moderateScale(22),
@@ -51,9 +54,13 @@ export default StyleSheet.create({
     },
 
     btnAddContainer: {
-        width: moderateScale(333),
+        width: moderateScale(260),
         height: moderateScale(65),
         justifyContent: 'center',
+    },
+    addImg:{
+        //marginTop: moderateScale(25),
+       // marginBottom: Platform.OS == "android" ? moderateScale(25) : moderateScale(10),
     },
     addIconContainer: {
         flex: 1,

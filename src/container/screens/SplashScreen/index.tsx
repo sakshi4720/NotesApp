@@ -8,16 +8,15 @@ import { RootStackParamList } from '../../../services/RootNavigator';
 
 
 const SplashScreen = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Notes">>()
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
 
   useEffect(() => {
-
-   
+  
     // timeout for adding additional delay to splash screen
     setTimeout(() => {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Notes' }],
+        routes: [{ name: 'Home' }],
       });
       splashScreen.hide();
     }, 1000);

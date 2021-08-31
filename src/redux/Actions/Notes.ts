@@ -10,8 +10,8 @@ export const addNotes = (note: Note): AppActions => ({
     note
 });
 
-export const setNotes = (note: Note): AppActions => ({
-    type: "SET_NOTES",
+export const getNotes = (note: Note): AppActions => ({
+    type: "GET_NOTES",
     note
 });
 
@@ -46,7 +46,7 @@ export const startAddNotes = (notesData: {
     }
 }
 
-export const setAddedNotes = (notesData: {
+export const getAddedNotes = (notesData: {
     id: number,
     value: string
 }) => {
@@ -63,7 +63,7 @@ export const setAddedNotes = (notesData: {
         const note = { id, value };
 
         dispatch(
-            addNotes({
+            getNotes({
                 ...note,
                 id
             })

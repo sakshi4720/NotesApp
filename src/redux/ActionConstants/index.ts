@@ -34,7 +34,7 @@ export interface ResetUserInfo {
 
 // EnterNotes Screen
 export const ADD_NOTES = "ADD_NOTES"
-export const SET_NOTES = "SET_NOTES"
+export const GET_NOTES = "GET_NOTES"
 export const REMOVE_NOTES = "REMOVE_NOTES"
 
 export interface AddNotesAction {
@@ -42,8 +42,8 @@ export interface AddNotesAction {
     note: Note;
 }
 
-export interface SetNotesAction {
-    type: typeof SET_NOTES;
+export interface GetNotesAction {
+    type: typeof GET_NOTES;
     note: Note;
 }
 
@@ -54,6 +54,6 @@ export interface RemoveNotesAction {
 
 export type UserTokenAndDataActionTypes = UpdateUserDataAndToken | UpdateUserToken | UpdateUserData | ResetUserInfo
 
-export type NotesActionTypes = AddNotesAction | RemoveNotesAction | SetNotesAction
+export type NotesActionTypes = AddNotesAction | RemoveNotesAction | GetNotesAction
 
 export type AppActions = UserTokenAndDataActionTypes | NotesActionTypes
