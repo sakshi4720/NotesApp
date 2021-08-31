@@ -19,7 +19,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         marginTop: width / 37.5,
         borderRadius: moderateScale(10),
-        borderColor: '#FF6700'
+        borderColor:'#ADD8E6'
 
     },
     txtNotesData: {
@@ -79,10 +79,8 @@ export default StyleSheet.create({
         marginTop: moderateScale(20)
     },
     deleteBtnContainer: {
-        // flexDirection: 'row',
-        // justifyContent: 'flex-end',
-        // alignItems: 'center',
-        marginStart: moderateScale(20)
+        marginStart: moderateScale(20),
+        marginBottom: moderateScale(15)
       },
 
 })

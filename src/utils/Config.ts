@@ -14,8 +14,8 @@ export default {
   colors: {
     WHITE: '#ffffff',
     BLACK: 'black',
-    HEX_GRADIENT1: ['#A62D8E', '#3A2A6E'],
-    HEX_GRADIENT2: ['#8F00FF', '#DDA0DD'],
+    HEX_GRADIENT1: ['#0000FF', '#ADD8E6'],
+    HEX_GRADIENT2: ['#ADD8E6', '#728FCE'],
 
 
   },

@@ -25,7 +25,7 @@ export const startAddNotes = (notesData: {
     value: string
 }) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        const { id = 0, value = "" } = notesData;
+        const { id , value  } = notesData;
 
         firebase.firestore().collection('userNotes').add({
             id: notesData.id,

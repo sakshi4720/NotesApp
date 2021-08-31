@@ -9,6 +9,9 @@ export const getIcons = (type: IconTypes, iconSize = 50) => {
       return <Icons.MCQIcon height={iconSize} width={iconSize} />;
       case 'QuestionIcon':
       return <Icons.QuestionIcon height={iconSize} width={iconSize} />;
+      case 'SettingsIcon':
+        return <Icons.SettingsIcon height={25} width={25} />;
+  
 
   }
 }

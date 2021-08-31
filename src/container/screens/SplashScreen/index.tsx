@@ -20,7 +20,7 @@ const SplashScreen = () => {
         routes: [{ name: 'Notes' }],
       });
       splashScreen.hide();
-    }, 100);
+    }, 1000);
   }, []);
   // returns empty view so that the transition is smooth
   return <View />;

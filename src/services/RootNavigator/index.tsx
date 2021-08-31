@@ -20,7 +20,7 @@ interface Props {
 const RootNavigator: React.FC<Props> = () => {
     const { Navigator, Screen } = RootStack
     return (
-        <Navigator initialRouteName="SplashScreen">
+        <Navigator initialRouteName="SplashScreen" screenOptions={{ headerShown: false }}>
             <Screen name="SplashScreen" component={SplashScreen} />
             <Screen name="Notes" component={Notes} />
             <Screen name="DetailedNotes" component={DetailedNotes} />

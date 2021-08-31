@@ -37,20 +37,24 @@ export default StyleSheet.create({
 
   },
   dataInfoContainer: {
-    marginLeft: moderateScale(15),
+    //marginLeft: moderateScale(15),
     marginTop: moderateScale(15),
     paddingBottom: moderateScale(11),
-    flex: 1
+    flex: 1,
+    height:moderateScale(100)
+    
   },
 
   txtItemDescription: {
     marginTop: moderateScale(5),
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(18),
     color: 'white',
-    maxWidth: moderateScale(168),
+    maxWidth: moderateScale(250),
     lineHeight: moderateScale(15),
     fontFamily:'ProductSans-Bold',
-    flex: 1
+    flex: 1,
+    paddingTop:10,
+    paddingBottom:10,
 
   },
   deleteBtnContainer: {
