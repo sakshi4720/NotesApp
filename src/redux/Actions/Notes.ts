@@ -20,30 +20,16 @@ export const removeNotes = (id: number): AppActions => ({
     id
 });
 
-export const startAddNotes = (notesData: {
-    id: number,
-    value: string
-}) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        const { id, value } = notesData;
-
-        firebase.firestore().collection('myNotes').add({
-            id: 0,
-            value: "my first note is here",
+export const startAddNotes = (value: string) => {
+    return async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+        const note = {
+            id: new Date().getTime(),
+            value,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
-
-        const note = { id, value };
-
-        dispatch(
-            addNotes({
-                ...note,
-                id,
-                value,
-            })
-
-
-        )
+        }
+        const res = await firebase.firestore().collection('myNotes').add(note)
+        dispatch(addNotes(note))
+        return { code: 200 }
     }
 }
 
