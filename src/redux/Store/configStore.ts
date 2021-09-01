@@ -16,7 +16,7 @@ export const rootReducer = combineReducers({
     
     persistedReducer: persistReducer(persistConfig, userDataTokenReducer),
    // userDataAndToken: userDataTokenReducer,
-    notes: notesReducer,
+    notes: persistReducer(persistConfig, notesReducer),
 })
 
 //holds the type of the whole application

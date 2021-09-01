@@ -76,7 +76,10 @@ const EnterNotes = () => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.rootMainContainer}>
 
-                <Header headerTitle={'Notes'} onBackPress={() => navigation.goBack()}/>
+                <Header isShowingOnBackPress={true}
+                headerTitle={'Notes'} 
+                onBackPress={() => navigation.goBack()}
+                />
 
                 {/* {noteArray.length > 0 ? <SwipeListView
                     style={styles.swiperListViewContainer}
