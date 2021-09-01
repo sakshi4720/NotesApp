@@ -19,14 +19,13 @@ const Home = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
 
-    const noteArray = useSelector((state: AppState) => state.notes.value);
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getAddedNotes)
 
     }, [])
 
+    const noteArray = useSelector((state: AppState) => state.notes.value);
     const actionButtonStyle = {
         color: "white",
         textBackground: 'transparent',
@@ -47,7 +46,7 @@ const Home = () => {
     ];
 
     const onFABPressed = (selectedOption?: string) => {
-
+        dispatch(getAddedNotes)
         if (selectedOption === 'Notes') {
             navigation.navigate("Notes")
             return
@@ -55,7 +54,7 @@ const Home = () => {
 
     }
 
-    console.log(JSON.stringify(noteArray))
+    //console.log(JSON.stringify(noteArray))
 
     // const onPressDeleteBtn = (item: Note, index: number) => {
 

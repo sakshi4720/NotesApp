@@ -54,7 +54,7 @@ const EnterNotes = () => {
         setNoteArray(noteArray => [...noteArray, notes]);
         setNotes({ ...notes, id: noteArray.length, value: "" })
 
-
+        navigation.goBack()
 
     }
 
@@ -77,8 +77,8 @@ const EnterNotes = () => {
             <SafeAreaView style={styles.rootMainContainer}>
 
                 <Header isShowingOnBackPress={true}
-                headerTitle={'Notes'} 
-                onBackPress={() => navigation.goBack()}
+                    headerTitle={'Notes'}
+                    onBackPress={() => navigation.goBack()}
                 />
 
                 {/* {noteArray.length > 0 ? <SwipeListView
@@ -109,7 +109,7 @@ const EnterNotes = () => {
                     onChangeText={text => onChangeText(text)} />
 
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' ,marginTop:25,marginStart:15,justifyContent:'space-between',marginEnd:15,}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 25, marginStart: 15, justifyContent: 'space-between', marginEnd: 15, }}>
                     <LinearGradient colors={['#ADD8E6', '#728FCE']} style={styles.linearGradient}>
                         <TouchableOpacity style={styles.btnAddContainer}
                             onPress={() => { onPressAddNoteBtn() }}>

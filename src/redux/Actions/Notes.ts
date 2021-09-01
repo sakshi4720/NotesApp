@@ -25,11 +25,11 @@ export const startAddNotes = (notesData: {
     value: string
 }) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        const { id , value  } = notesData;
+        const { id, value } = notesData;
 
-        firebase.firestore().collection('userNotes').add({
-            id: notesData.id,
-            value: notesData.value,
+        firebase.firestore().collection('myNotes').add({
+            id: 0,
+            value: "my first note is here",
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
 
@@ -38,10 +38,11 @@ export const startAddNotes = (notesData: {
         dispatch(
             addNotes({
                 ...note,
-                id
+                id,
+                value,
             })
 
-           
+
         )
     }
 }
@@ -53,12 +54,15 @@ export const getAddedNotes = (notesData: {
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
         const { id = 0, value = "" } = notesData;
 
-    
-        firebase.firestore().collection('userNotes').doc().set({
-            id: notesData.id,
-            value: notesData.value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
+        const db = firebase.firestore();
+        db.collection('myNotes').get().then((snapshot) => {
+
+            snapshot.docs.forEach(doc => {
+                let items = doc.data();
+
+            });
+
+        });
 
         const note = { id, value };
 
@@ -68,13 +72,13 @@ export const getAddedNotes = (notesData: {
                 id
             })
 
-           
+
         )
     }
 }
 
 export const startRemoveNotes = (id: number) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState)=>{
+    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
         dispatch(removeNotes(id));
     }
 }
