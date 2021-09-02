@@ -7,10 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import LinearGradient from "react-native-linear-gradient";
 import { addNoteValidationType, validateAddNote } from "../../../utils/Validate";
-import { getIcons } from '../../../../assets/images/icons'
-import CustomTabCardComponent from '../../reuse/CustomTabCardComponent';
-import { startAddNotes } from "../../../redux/Actions/Notes";
-import { SwipeListView } from "react-native-swipe-list-view";
+import { getAddedNotes,  startAddNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 
 export interface Note {
@@ -46,6 +43,7 @@ const EnterNotes = () => {
         // res 
         // Async Redux thunk
         // return function
+        dispatch(getAddedNotes())
         navigation.goBack()
     }
     return (
@@ -60,15 +58,8 @@ const EnterNotes = () => {
                     multiline={true}
                     value={currentText}
                     onChangeText={text => onChangeText(text)} />
-                {/**moderstae Scale */}
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 25,
-                    marginStart: 15,
-                    justifyContent: 'space-between',
-                    marginEnd: 15,
-                }}>
+              
+                <View style={styles.addBtnRootContainer}>
                     <LinearGradient colors={['#ADD8E6', '#728FCE']}
                         style={styles.linearGradient}>
                         <TouchableOpacity style={styles.btnAddContainer}

@@ -89,5 +89,13 @@ export default StyleSheet.create({
         marginStart: moderateScale(20),
         marginBottom: moderateScale(15)
       },
+      addBtnRootContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop:  moderateScale(25),
+        marginStart: moderateScale(15),
+        justifyContent: 'space-between',
+        marginEnd:  moderateScale(15),
+      }
 
 })

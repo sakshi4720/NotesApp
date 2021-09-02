@@ -43,8 +43,8 @@ export default StyleSheet.create({
         marginTop: moderateScale(20)
     },
     deleteBtnContainer: {
-        marginStart: moderateScale(20),
-        marginBottom: moderateScale(15)
+        marginEnd: moderateScale(20),
+        //marginBottom: moderateScale(15)
       },
       addIconContainer: {
         flex: 1,

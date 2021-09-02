@@ -10,7 +10,7 @@ export const addNotes = (note: Note): AppActions => ({
     note
 });
 
-export const getNotes = (note: Note): AppActions => ({
+export const getNotes = (note: Note[]): AppActions => ({
     type: "GET_NOTES",
     note
 });
@@ -33,38 +33,42 @@ export const startAddNotes = (value: string) => {
     }
 }
 
-export const getAddedNotes = (notesData: {
-    id: number,
-    value: string
-}) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        const { id = 0, value = "" } = notesData;
+export const getAddedNotes = () => {
+    return async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
 
         const db = firebase.firestore();
+        const notes: Note[] = [];
         db.collection('myNotes').get().then((snapshot) => {
 
             snapshot.docs.forEach(doc => {
-                let items = doc.data();
-
+                notes.push({ id: doc.data().id, value: doc.data().value });
             });
 
+            dispatch(getNotes(notes))
+            //return { code: 200 }
         });
 
-        const note = { id, value };
-
-        dispatch(
-            getNotes({
-                ...note,
-                id
-            })
 
 
-        )
+
     }
 }
 
-export const startRemoveNotes = (id: number) => {
+export const startRemoveNotes = (noteArray: Note[], id: number) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        dispatch(removeNotes(id));
+
+        // let selectedItemIndex = noteArray.findIndex(element => console.log(element.id));
+        const db = firebase.firestore();
+        db.collection('myNotes').where('id', '==', id)
+            .get()
+            .then(querySnapshot => {
+                const documentId = querySnapshot.docs.map(doc => doc.id)
+                console.log(documentId)
+                let res = db.collection('myNotes').doc(documentId.toString()).delete()
+
+                console.log(res)
+                dispatch(removeNotes(id));
+            })
+
     }
 }

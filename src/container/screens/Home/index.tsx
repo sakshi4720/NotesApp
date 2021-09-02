@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, } from "react";
 import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from "./styles";
@@ -12,7 +12,7 @@ import CustomTabCardComponent from "../../reuse/CustomTabCardComponent";
 import { Note } from "../EnterNotes";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../redux/Store/configStore";
-import { getAddedNotes } from "../../../redux/Actions/Notes";
+import { getAddedNotes, startRemoveNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 
 const Home = () => {
@@ -21,11 +21,17 @@ const Home = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getAddedNotes)
+        getNotesListing()
 
     }, [])
 
-    const noteArray = useSelector((state: AppState) => state.notes.value);
+    const getNotesListing = async () => {
+        const res = await dispatch(getAddedNotes())
+        //console.log(res)
+    }
+
+    const noteArray = useSelector((state: AppState) => state.notes);
+
     const actionButtonStyle = {
         color: "white",
         textBackground: 'transparent',
@@ -46,7 +52,7 @@ const Home = () => {
     ];
 
     const onFABPressed = (selectedOption?: string) => {
-        dispatch(getAddedNotes)
+
         if (selectedOption === 'Notes') {
             navigation.navigate("Notes")
             return
@@ -54,42 +60,41 @@ const Home = () => {
 
     }
 
-    //console.log(JSON.stringify(noteArray))
+    const onPressDeleteBtn = (noteArray: Note[], item: Note, index: number) => {
 
-    // const onPressDeleteBtn = (item: Note, index: number) => {
+        dispatch(startRemoveNotes(noteArray,item.id))
+        return
 
-    //     let selectedIndex = noteArray.findIndex((element) => { return element.id == item.id })
-    //     noteArray.splice(selectedIndex, 1)
-    //     //setNotes({ ...notes, id: noteArray.length, value: "" })
-    // }
+        //setNotes({ ...notes, id: noteArray.length, value: "" })
+    }
 
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
-        console.log(JSON.stringify(item))
+        console.log(JSON.stringify(index))
         return (
             <CustomTabCardComponent userNotesObj={item} />
         )
     }
 
+
+    console.log(noteArray)
     return (
 
-        < SafeAreaView style={styles.rootMainContainer} >
+        <SafeAreaView style={styles.rootMainContainer} >
 
             <Header isShowingOnBackPress={false}
                 headerTitle={'Home'}
-                onBackPress={() => navigation.goBack()}
-            />
-
+                onBackPress={() => navigation.goBack()} />
             {
-                noteArray.length > 0 ? <SwipeListView
+                noteArray.length > 1 ? <SwipeListView
                     style={styles.swiperListViewContainer}
                     data={noteArray}
                     renderItem={renderNotes}
-                    keyExtractor={(item) => item.id.toString()}
+                    //keyExtractor={(item) => item.id.toString()}
                     renderHiddenItem={(data, rowMap) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity style={styles.deleteBtnContainer}
-                                //onPress={() => onPressDeleteBtn(data.item, data.index)}
-                                >
+                                onPress={() => onPressDeleteBtn(noteArray, data.item, data.index)}
+                            >
                                 <Image source={require('../../../../assets/images/icon_delete_red.png')}
                                     style={{ height: 25, width: 25 }} />
                             </TouchableOpacity>

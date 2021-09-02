@@ -1,11 +1,7 @@
 import { Note } from "../../container/screens/EnterNotes";
 import { NotesActionTypes } from "../ActionConstants";
 
-const INITIAL_STATE: Note = {
-    id: 0,
-    value: "",
-};
-
+const INITIAL_STATE: Note[] = []
 
 const notesReducer = (state = INITIAL_STATE, action: NotesActionTypes) => {
     switch (action.type) {
@@ -13,10 +9,10 @@ const notesReducer = (state = INITIAL_STATE, action: NotesActionTypes) => {
             return { ...state, ...action.note };
 
         case "GET_NOTES":
-            return { ...state, ...action.note };
+            return [...action.note];
 
         case "REMOVE_NOTES":
-        //return state.filter(({ id }) => id !== action.id);
+        return state.filter(({ id }) => id !== action.id);
 
         default:
             return state;

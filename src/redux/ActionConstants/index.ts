@@ -44,7 +44,7 @@ export interface AddNotesAction {
 
 export interface GetNotesAction {
     type: typeof GET_NOTES;
-    note: Note;
+    note: Note[];
 }
 
 export interface RemoveNotesAction {

@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity,  } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import styles from './styles';
 import { Note } from '../../screens/EnterNotes';
