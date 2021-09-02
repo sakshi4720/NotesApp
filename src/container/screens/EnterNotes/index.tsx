@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import LinearGradient from "react-native-linear-gradient";
 import { addNoteValidationType, validateAddNote } from "../../../utils/Validate";
-import { getAddedNotes,  startAddNotes } from "../../../redux/Actions/Notes";
+import { getAddedNotes, startAddNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 
 export interface Note {
@@ -24,10 +24,12 @@ const EnterNotes = () => {
     const [currentText, setCurrentText] = useState("")
     const [error, setError] = useState<addNoteValidationType>({})
 
+    //onChangeText -- sets text in textinput
     const onChangeText = (text: string) => {
         setCurrentText(text)
     }
 
+    //function to add notes
     const onPressAddNoteBtn = async () => {
         const result = validateAddNote(currentText);
         if (!result.isValid) {
@@ -40,35 +42,40 @@ const EnterNotes = () => {
             });
         }
         const res = await dispatch(startAddNotes(currentText))
-        // res 
-        // Async Redux thunk
-        // return function
         dispatch(getAddedNotes())
         navigation.goBack()
     }
+
+    // navigate to back screen
+    const onBackPress = () => {
+        navigation.goBack()
+    }
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.rootMainContainer}>
                 <Header isShowingOnBackPress={true}
                     headerTitle={'Notes'}
-                    onBackPress={() => navigation.goBack()}
+                    onBackPress={onBackPress}
                 />
                 <TextInput style={styles.txtInputContainer}
                     placeholder={'Enter your text here...'}
                     multiline={true}
+                    textAlignVertical={'top'}
                     value={currentText}
                     onChangeText={text => onChangeText(text)} />
-              
+
                 <View style={styles.addBtnRootContainer}>
                     <LinearGradient colors={['#ADD8E6', '#728FCE']}
                         style={styles.linearGradient}>
                         <TouchableOpacity style={styles.btnAddContainer}
-                            onPress={() => { onPressAddNoteBtn() }}>
+                            onPress={onPressAddNoteBtn}>
                             <Text style={styles.buttonText}>Add</Text>
                         </TouchableOpacity>
                     </LinearGradient>
 
-                    <TouchableOpacity style={styles.addImg}>
+                    <TouchableOpacity style={styles.addImg}
+                        onPress={onPressAddNoteBtn}>
                         <Image source={require('../../../../assets/images/ic_add_notes.png')} />
                     </TouchableOpacity>
                 </View>

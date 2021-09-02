@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
 
   txtItemDescription: {
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(16),
     color: 'white',
     lineHeight: moderateScale(25),
     fontFamily: 'ProductSans-Bold',

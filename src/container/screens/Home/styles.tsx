@@ -1,12 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-const { height, width } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 export default StyleSheet.create({
 
     rootMainContainer: {
         flex: 1,
-
     },
     iconAddBtnContainer: {
         bottom: width / 5,
@@ -14,14 +13,13 @@ export default StyleSheet.create({
         position: 'absolute'
     },
     rootItemContainer: {
-        margin: 15,
+        margin: moderateScale(15),
         alignItems: 'center',
         justifyContent: 'center'
 
     },
     txtTitle: {
-        fontSize: 18,
-        color: "red",
+        fontSize: moderateScale(18),
         fontFamily: 'ProductSans-BoldItalic'
     },
     txtNoNotesFound: {
@@ -29,26 +27,28 @@ export default StyleSheet.create({
         fontSize: moderateScale(22),
         textAlign: 'center',
         fontFamily: 'ProductSans-Bold',
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     rowBack: {
         alignItems: 'center',
-        //backgroundColor: 'red',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-         
+
     },
-    swiperListViewContainer:{
+    swiperListViewContainer: {
         marginTop: moderateScale(20)
     },
     deleteBtnContainer: {
         marginEnd: moderateScale(20),
-        //marginBottom: moderateScale(15)
-      },
-      addIconContainer: {
+    },
+    addIconContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
+    deleteIcon: {
+        height: moderateScale(25),
+        width: moderateScale(25),
+    }
 })

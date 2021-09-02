@@ -6,8 +6,6 @@ export default StyleSheet.create({
 
     rootMainContainer: {
         flex: 1,
-        //alignItems: 'center'
-
     },
     label: {
         marginTop: width / 37.5,
@@ -15,13 +13,13 @@ export default StyleSheet.create({
     txtInputContainer: {
         height: moderateScale(150),
         width: moderateScale(333),
-        padding:moderateScale(8),
+        padding: moderateScale(8),
         borderWidth: 1,
-        marginTop:moderateScale(30),
+        marginTop: moderateScale(30),
         borderRadius: moderateScale(10),
-        borderColor:'#ADD8E6',
-        marginStart:moderateScale(15)
-        
+        borderColor: '#ADD8E6',
+        marginStart: moderateScale(15)
+
 
     },
     txtNotesData: {
@@ -38,29 +36,27 @@ export default StyleSheet.create({
         width: moderateScale(260),
         alignItems: 'center',
         justifyContent: 'center',
-       
-      
+
+
         borderRadius: moderateScale(10),
         borderWidth: 1,
         borderColor: 'transparent',
-        
+
     },
     buttonText: {
         fontSize: moderateScale(22),
         textAlign: 'center',
         color: '#ffffff',
         fontFamily: 'ProductSans-Bold',
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
 
     btnAddContainer: {
         width: moderateScale(260),
-        height: moderateScale(65),
+        height: moderateScale(50),
         justifyContent: 'center',
     },
-    addImg:{
-        //marginTop: moderateScale(25),
-       // marginBottom: Platform.OS == "android" ? moderateScale(25) : moderateScale(10),
+    addImg: {
     },
     addIconContainer: {
         flex: 1,
@@ -72,7 +68,7 @@ export default StyleSheet.create({
         fontSize: moderateScale(22),
         textAlign: 'center',
         fontFamily: 'ProductSans-Bold',
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     rowBack: {
         alignItems: 'center',
@@ -80,22 +76,22 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-         
+
     },
-    swiperListViewContainer:{
+    swiperListViewContainer: {
         marginTop: moderateScale(20)
     },
     deleteBtnContainer: {
         marginStart: moderateScale(20),
         marginBottom: moderateScale(15)
-      },
-      addBtnRootContainer:{
+    },
+    addBtnRootContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop:  moderateScale(25),
+        marginTop: moderateScale(25),
         marginStart: moderateScale(15),
         justifyContent: 'space-between',
-        marginEnd:  moderateScale(15),
-      }
+        marginEnd: moderateScale(15),
+    }
 
 })

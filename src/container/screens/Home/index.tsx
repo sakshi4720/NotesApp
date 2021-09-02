@@ -25,9 +25,10 @@ const Home = () => {
 
     }, [])
 
+
+    //callback for get notes operation
     const getNotesListing = async () => {
         const res = await dispatch(getAddedNotes())
-        //console.log(res)
     }
 
     const noteArray = useSelector((state: AppState) => state.notes);
@@ -60,23 +61,17 @@ const Home = () => {
 
     }
 
-    const onPressDeleteBtn = (noteArray: Note[], item: Note, index: number) => {
-
-        dispatch(startRemoveNotes(noteArray,item.id))
-        return
-
-        //setNotes({ ...notes, id: noteArray.length, value: "" })
+    //callback for delete operation
+    const onPressDeleteBtn = (item: Note, index: number) => {
+        dispatch(startRemoveNotes(item.id))
     }
 
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
-        console.log(JSON.stringify(index))
         return (
             <CustomTabCardComponent userNotesObj={item} />
         )
     }
 
-
-    console.log(noteArray)
     return (
 
         <SafeAreaView style={styles.rootMainContainer} >
@@ -89,14 +84,14 @@ const Home = () => {
                     style={styles.swiperListViewContainer}
                     data={noteArray}
                     renderItem={renderNotes}
-                    //keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item.id.toString()}
                     renderHiddenItem={(data, rowMap) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity style={styles.deleteBtnContainer}
-                                onPress={() => onPressDeleteBtn(noteArray, data.item, data.index)}
+                                onPress={() => onPressDeleteBtn(data.item, data.index)}
                             >
                                 <Image source={require('../../../../assets/images/icon_delete_red.png')}
-                                    style={{ height: 25, width: 25 }} />
+                                    style={styles.deleteIcon} />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -125,17 +120,8 @@ const Home = () => {
                     shadowColor: 'transparent'
                 }}
             />
-
-
-            {/* <TouchableOpacity style={styles.iconAddBtnContainer}
-                onPress={() => {
-                    navigation.navigate("EnterNotes")
-                }}>
-                <Image source={require('../../../assets/images/icon_add_more.png')} />
-            </TouchableOpacity> */}
         </SafeAreaView >
     )
-
 }
 
 export default Home;
