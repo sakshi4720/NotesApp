@@ -4,14 +4,28 @@ import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import { OutlinedTextField } from 'rn-material-ui-textfield'
 import { getIcons } from "../../../../assets/images/icons";
-import auth from '@react-native-firebase/auth';
-
+import auth, { firebase } from '@react-native-firebase/auth';
 import styles from './styles';
+import { showFlashMessage } from '../../../utils/Common';
+import { useDispatch } from "react-redux";
+import { updateUserData, updateUserToken } from "../../../redux/Actions/UserDataToken";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../services/RootNavigator";
+
+export interface UserTokenInfo {
+    token: undefined;
+
+}
 
 const SignIn = () => {
 
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "SignIn">>()
+
     const [currentEmail, setCurrentEmail] = useState("")
     const [currentPassword, setCurrentPassword] = useState("")
+
+    const dispatch = useDispatch()
 
     const onChangeEmail = (text: string) => {
         setCurrentEmail(text)
@@ -24,17 +38,25 @@ const SignIn = () => {
     const onPressSignInBtn = () => {
         auth()
             .createUserWithEmailAndPassword(currentEmail, currentPassword)
-            .then(() => {
+            .then((res) => {
+                if (res.user) {
+                    const token = auth().currentUser?.getIdToken()
+                    console.log(token);
+                    //dispatch(updateUserToken(token));
+                    navigation.navigate("Home")
+                    showFlashMessage('User account created & signed in!','success');
+                }
 
-                console.log('User account created & signed in!');
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
-                    console.log('That email address is already in use!');
+                    showFlashMessage('That email address is already in use!','warning');
+                    return
                 }
 
                 if (error.code === 'auth/invalid-email') {
-                    console.log('That email address is invalid!');
+                    showFlashMessage('That email address is invalid!','danger');
+                    return
                 }
 
                 console.error(error);

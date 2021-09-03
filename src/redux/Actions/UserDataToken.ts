@@ -1,7 +1,7 @@
 
 import { AppActions } from "../ActionConstants";
 import { firebase } from "@react-native-firebase/firestore"
-import { UserTokenInfo } from "../../container/screens/GoogleSignIn";
+import { UserTokenInfo } from "../../container/screens/SignIn";
 import { Dispatch } from "redux";
 import { AppState } from "../Store/configStore";
 

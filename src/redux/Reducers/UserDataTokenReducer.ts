@@ -1,5 +1,5 @@
 
-import { UserTokenInfo } from "../../container/screens/GoogleSignIn";
+import { UserTokenInfo } from "../../container/screens/SignIn";
 import { UserTokenAndDataActionTypes } from "../ActionConstants";
 import { Log } from '../../utils/Logger';
 

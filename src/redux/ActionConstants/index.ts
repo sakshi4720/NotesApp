@@ -1,5 +1,5 @@
 import { Note } from "../../container/screens/EnterNotes"
-import { UserTokenInfo } from "../../container/screens/GoogleSignIn"
+import { UserTokenInfo } from "../../container/screens/SignIn"
 
 // GoogleSignIn Screen
 
