@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Image, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView, View, TouchableOpacity, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import { OutlinedTextField } from 'rn-material-ui-textfield'
@@ -8,13 +8,13 @@ import auth, { firebase } from '@react-native-firebase/auth';
 import styles from './styles';
 import { showFlashMessage } from '../../../utils/Common';
 import { useDispatch } from "react-redux";
-import { updateUserData, updateUserToken } from "../../../redux/Actions/UserDataToken";
+import { updateUserToken } from "../../../redux/Actions/UserDataToken";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
 
 export interface UserTokenInfo {
-    token: undefined;
+    token: string | undefined;
 
 }
 
@@ -37,25 +37,24 @@ const SignIn = () => {
 
     const onPressSignInBtn = () => {
         auth()
-            .createUserWithEmailAndPassword(currentEmail, currentPassword)
+            .signInWithEmailAndPassword(currentEmail, currentPassword)
             .then((res) => {
-                if (res.user) {
-                    const token = auth().currentUser?.getIdToken()
-                    console.log(token);
-                    //dispatch(updateUserToken(token));
-                    navigation.navigate("Home")
-                    showFlashMessage('User account created & signed in!','success');
+                if (res) {
+                    auth().currentUser?.getIdToken().then(token => {
+                        dispatch(updateUserToken(token));
+                        navigation.navigate("Home")
+                        showFlashMessage('User account created & signed in!', 'success');
+                    })
                 }
-
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
-                    showFlashMessage('That email address is already in use!','warning');
+                    showFlashMessage('That email address is already in use!', 'warning');
                     return
                 }
 
                 if (error.code === 'auth/invalid-email') {
-                    showFlashMessage('That email address is invalid!','danger');
+                    showFlashMessage('That email address is invalid!', 'danger');
                     return
                 }
 

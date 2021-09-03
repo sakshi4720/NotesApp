@@ -25,7 +25,6 @@ const Home = () => {
 
     }, [])
 
-
     //callback for get notes operation
     const getNotesListing = async () => {
         const res = await dispatch(getAddedNotes())
@@ -37,7 +36,6 @@ const Home = () => {
         color: "white",
         textBackground: 'transparent',
         textColor: 'white',
-
 
     }
 
