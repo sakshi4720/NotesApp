@@ -2,6 +2,7 @@ import AddIcon from './ic_add_doc.svg';
 import MCQIcon from './ic_mcq.svg';
 import QuestionIcon from './ic_question.svg';
 import SettingsIcon from './ic_settings.svg';
+import Logo from './ic_logo.svg';
 
 
 export const Icons = {
@@ -9,6 +10,7 @@ export const Icons = {
     MCQIcon,
     QuestionIcon,
     SettingsIcon,
+    Logo
     
 };
 

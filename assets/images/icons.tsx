@@ -11,7 +11,8 @@ export const getIcons = (type: IconTypes, iconSize = 50) => {
       return <Icons.QuestionIcon height={iconSize} width={iconSize} />;
       case 'SettingsIcon':
         return <Icons.SettingsIcon height={25} width={25} />;
-       
+        case 'Logo':
+          return <Icons.Logo height={iconSize} width={iconSize} />;
 
   }
 }
