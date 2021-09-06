@@ -58,7 +58,7 @@ const SignIn = () => {
                     return
                 }
 
-                console.error(error);
+                showFlashMessage(error.message,'danger');
             });
     }
 

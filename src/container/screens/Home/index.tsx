@@ -1,5 +1,5 @@
 import React, { useEffect, } from "react";
-import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard } from 'react-native';
+import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from "./styles";
 import { RootStackParamList } from "../../../services/RootNavigator";
@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../redux/Store/configStore";
 import { getAddedNotes, startRemoveNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
+import auth from '@react-native-firebase/auth';
+import { resetUserInfo, updateUserToken } from "../../../redux/Actions/UserDataToken";
+import { Log } from "../../../utils/Logger";
 
 const Home = () => {
 
@@ -64,6 +67,32 @@ const Home = () => {
         dispatch(startRemoveNotes(item.id))
     }
 
+    // sign out handling
+    const onSignOutBtnPress = () => {
+
+        Alert.alert(
+            'NotesApp',
+            "Are you sure you want to logout?",
+            [{
+                text: "No", onPress: () => {
+                }
+            }, {
+                text: "Yes", onPress: () => {
+                    try {
+                        auth().signOut().then((response) => {
+                            dispatch(updateUserToken(''))
+                        });
+                    } catch (e) {
+                      Log(e);
+                    }
+                }
+            }
+            ],
+            { cancelable: false }
+        );
+
+    }
+
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
         return (
             <CustomTabCardComponent userNotesObj={item} />
@@ -76,7 +105,9 @@ const Home = () => {
 
             <Header isShowingOnBackPress={false}
                 headerTitle={'Home'}
-                onBackPress={() => navigation.goBack()} />
+                isShowingSignOut={true}
+                onBackPress={() => navigation.goBack()}
+                onSignOutBtnPress={() => onSignOutBtnPress()} />
             {
                 noteArray.length > 1 ? <SwipeListView
                     style={styles.swiperListViewContainer}

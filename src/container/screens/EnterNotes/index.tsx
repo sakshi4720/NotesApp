@@ -56,7 +56,9 @@ const EnterNotes = () => {
             <SafeAreaView style={styles.rootMainContainer}>
                 <Header isShowingOnBackPress={true}
                     headerTitle={'Notes'}
+                    isShowingSignOut={false}
                     onBackPress={onBackPress}
+                    onSignOutBtnPress={() => { }}
                 />
                 <TextInput style={styles.txtInputContainer}
                     placeholder={'Enter your text here...'}

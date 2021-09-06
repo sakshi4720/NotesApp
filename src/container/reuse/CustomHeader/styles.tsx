@@ -24,13 +24,16 @@ export default StyleSheet.create({
     },
     rightImageContainer: {
         end: moderateScale(15),
-        position: 'absolute'
+        position: 'absolute',
+        height:moderateScale(40),
+        width:moderateScale(40),
+        justifyContent:'center'
     },
     backIconContainer:{
         start: moderateScale(15),
         position: 'absolute',
-        height:40,
-        width:40,
+        height:moderateScale(40),
+        width:moderateScale(40),
         justifyContent:'center'
     }
 })

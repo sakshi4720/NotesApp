@@ -23,17 +23,23 @@ export const removeNotes = (id: number): AppActions => ({
 //// add notes to firestore
 export const startAddNotes = (value: string) => {
     return async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+
+        var user = firebase.auth().currentUser;
         const note = {
             id: new Date().getTime(),
             value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            userID: user?.uid,
         }
 
-        const res = await firebase.firestore().collection('myNotes').add(note)
+        firebase.firestore().collection('myNotes').add(note);
+
         dispatch(addNotes(note))
         return { code: 200 }
     }
 }
+
+
 
 // get notes from firestore
 export const getAddedNotes = () => {
@@ -41,9 +47,11 @@ export const getAddedNotes = () => {
 
         const db = firebase.firestore();
         const notes: Note[] = [];
+        var user = firebase.auth().currentUser;
         db.collection('myNotes').orderBy('id', 'desc').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
-                notes.push({ id: doc.data().id, value: doc.data().value });
+                if (doc.data().userID == user?.uid)
+                    notes.push({ id: doc.data().id, value: doc.data().value });
             });
             dispatch(getNotes(notes))
         });
