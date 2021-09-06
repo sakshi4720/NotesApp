@@ -109,7 +109,7 @@ const Home = () => {
                 onBackPress={() => navigation.goBack()}
                 onSignOutBtnPress={() => onSignOutBtnPress()} />
             {
-                noteArray.length > 1 ? <SwipeListView
+                noteArray.length > 0 ? <SwipeListView
                     style={styles.swiperListViewContainer}
                     data={noteArray}
                     renderItem={renderNotes}
