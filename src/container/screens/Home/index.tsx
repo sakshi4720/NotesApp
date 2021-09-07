@@ -14,9 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../redux/Store/configStore";
 import { getAddedNotes, startRemoveNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
-import auth from '@react-native-firebase/auth';
-import { resetUserInfo, updateUserToken } from "../../../redux/Actions/UserDataToken";
-import { Log } from "../../../utils/Logger";
+import { resetUserInfo, } from "../../../redux/Actions/UserDataToken";
 
 const Home = () => {
 
@@ -68,9 +66,9 @@ const Home = () => {
     }
 
     // sign out handling
-    const onSignOutBtnPress = () => {
+    const onSignOutBtnPress = async () => {
 
-        Alert.alert(
+        await Alert.alert(
             'NotesApp',
             "Are you sure you want to logout?",
             [{
@@ -78,13 +76,7 @@ const Home = () => {
                 }
             }, {
                 text: "Yes", onPress: () => {
-                    try {
-                        auth().signOut().then((response) => {
-                            dispatch(updateUserToken(''))
-                        });
-                    } catch (e) {
-                      Log(e);
-                    }
+                     dispatch(resetUserInfo())
                 }
             }
             ],

@@ -27,7 +27,7 @@ export default StyleSheet.create({
         borderColor: 'transparent',
         marginStart: moderateScale(15),
         marginEnd: moderateScale(15),
-        marginBottom: moderateScale(25),
+       
         alignSelf:'center'
     },
     btnAddContainer: {
@@ -42,4 +42,10 @@ export default StyleSheet.create({
         fontFamily: 'ProductSans-Bold',
         fontWeight: 'bold'
     },
+    txtSignUp:{
+        color:'#728FCE',
+        textAlign: 'center',
+        marginBottom: moderateScale(25),
+        marginTop: moderateScale(15),
+    }
 })

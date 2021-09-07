@@ -35,6 +35,11 @@ const SignIn = () => {
         setCurrentPassword(text)
     }
 
+    //onPressSignUp
+    const onPressSignUp = () => {
+        navigation.navigate('SignUp')
+    }
+
     const onPressSignInBtn = () => {
         auth()
             .signInWithEmailAndPassword(currentEmail, currentPassword)
@@ -109,6 +114,9 @@ const SignIn = () => {
                     <Text style={styles.buttonText}>Sign In</Text>
                 </TouchableOpacity>
             </LinearGradient>
+
+            <Text style={styles.txtSignUp}
+            onPress={onPressSignUp}>Create new account? Signup here.</Text>
 
         </SafeAreaView>
     )

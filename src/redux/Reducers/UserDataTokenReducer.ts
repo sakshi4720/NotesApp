@@ -15,6 +15,7 @@ const userDataTokenReducer = (state = INITIAL_STATE, action: UserTokenAndDataAct
             return { ...state, ...action.payload }
 
         case "UPDATE_USER_TOKEN":
+            console.log(action.token)
             return { ...state, token: action.token }
 
         case "UPDATE_USER_DATA":
