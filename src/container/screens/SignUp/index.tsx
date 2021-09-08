@@ -12,6 +12,7 @@ import { updateUserToken } from "../../../redux/Actions/UserDataToken";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
+import Loader from '../../reuse/CustomLoader';
 
 export interface UserTokenInfo {
     token: string | undefined;
@@ -25,6 +26,8 @@ const SignUp = () => {
     const [currentEmail, setCurrentEmail] = useState("")
     const [currentUserName, setCurrentUserName] = useState("")
     const [currentPassword, setCurrentPassword] = useState("")
+    const [loading, setLoading] = useState<boolean>(false)
+
 
     const dispatch = useDispatch()
 
@@ -44,18 +47,37 @@ const SignUp = () => {
     }
 
     const onPressSignInBtn = () => {
+
+        if (currentUserName.length === 0) {
+            showFlashMessage('Please enter your username',"danger")
+            return 
+        }
+
+        if (currentEmail.length === 0) {
+            showFlashMessage('Please enter your email',"danger")
+            return 
+        }
+      
+        if (currentPassword.length === 0) {
+          showFlashMessage('Please enter your password',"danger")
+          return 
+        }
+
+        setLoading(true)
         auth()
             .createUserWithEmailAndPassword(currentEmail, currentPassword)
             .then((res) => {
                 if (res) {
                     auth().currentUser?.getIdToken().then(token => {
                         dispatch(updateUserToken(token));
+                        setLoading(false)
                         navigation.navigate("Home")
                         showFlashMessage('User account created & signed in!', 'success');
                     })
                 }
             })
             .catch(error => {
+                setLoading(false)
                 if (error.code === 'auth/email-already-in-use') {
                     showFlashMessage('That email address is already in use!', 'warning');
                     return
@@ -122,6 +144,8 @@ const SignUp = () => {
 
                     />
                 </View>
+
+                {loading && <Loader />}
 
                 <LinearGradient colors={['#ADD8E6', '#728FCE']}
                     style={styles.linearGradient}>

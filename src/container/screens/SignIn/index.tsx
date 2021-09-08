@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, TouchableOpacity, Text } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { SafeAreaView, View, TouchableOpacity, Text, TextInput } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
-import { OutlinedTextField } from 'rn-material-ui-textfield'
+import { OutlinedTextField, } from 'rn-material-ui-textfield'
 import { getIcons } from "../../../../assets/images/icons";
 import auth, { firebase } from '@react-native-firebase/auth';
 import styles from './styles';
@@ -12,6 +12,8 @@ import { updateUserToken } from "../../../redux/Actions/UserDataToken";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
+import { validateSignIn } from "../../../utils/Validate";
+import Loader from '../../reuse/CustomLoader';
 
 export interface UserTokenInfo {
     token: string | undefined;
@@ -24,6 +26,13 @@ const SignIn = () => {
 
     const [currentEmail, setCurrentEmail] = useState("")
     const [currentPassword, setCurrentPassword] = useState("")
+    const [loading, setLoading] = useState<boolean>(false)
+    const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false)
+
+
+    //refs
+    const emailRef = useRef<TextInput | null>(null)
+    const passwordRef = useRef<TextInput | null>(null)
 
     const dispatch = useDispatch()
 
@@ -41,18 +50,32 @@ const SignIn = () => {
     }
 
     const onPressSignInBtn = () => {
+
+        if (currentEmail.length === 0) {
+            showFlashMessage('Please enter your email', "danger")
+            return
+        }
+
+        if (currentPassword.length === 0) {
+            showFlashMessage('Please enter your password', "danger")
+            return
+        }
+
+        setLoading(true)
         auth()
             .signInWithEmailAndPassword(currentEmail, currentPassword)
             .then((res) => {
                 if (res) {
                     auth().currentUser?.getIdToken().then(token => {
                         dispatch(updateUserToken(token));
+                        setLoading(false);
                         navigation.navigate("Home")
                         showFlashMessage('User account created & signed in!', 'success');
                     })
                 }
             })
             .catch(error => {
+                setLoading(false);
                 if (error.code === 'auth/email-already-in-use') {
                     showFlashMessage('That email address is already in use!', 'warning');
                     return
@@ -62,9 +85,9 @@ const SignIn = () => {
                     showFlashMessage('That email address is invalid!', 'danger');
                     return
                 }
-
-                showFlashMessage(error.message,'danger');
+                showFlashMessage(error.message, 'danger');
             });
+
     }
 
     return (
@@ -83,15 +106,19 @@ const SignIn = () => {
                     autoCorrect={false}
                     enablesReturnKeyAutomatically={true}
                     onChangeText={onChangeEmail}
-                    returnKeyType="done"
+                    inputRef={emailRef}
+                    onSubmitEditing={() => {
+                        passwordRef.current?.focus();
+                    }}
+                    returnKeyType="next"
                     label="Email Address"
 
                 />
 
                 <OutlinedTextField
                     containerStyle={styles.textFieldContainer}
-
-                    secureTextEntry={true}
+                    inputRef={passwordRef}
+                    secureTextEntry={secureTextEntry}
                     autoCapitalize="none"
                     autoCorrect={false}
                     enablesReturnKeyAutomatically={true}
@@ -102,9 +129,12 @@ const SignIn = () => {
                     title="Choose wisely"
                     maxLength={20}
                     characterRestriction={20}
-
+                    onAcc
+                 
                 />
             </View>
+
+            {loading && <Loader />}
 
             <LinearGradient colors={['#ADD8E6', '#728FCE']}
                 style={styles.linearGradient}>
@@ -116,7 +146,7 @@ const SignIn = () => {
             </LinearGradient>
 
             <Text style={styles.txtSignUp}
-            onPress={onPressSignUp}>Create new account? Signup here.</Text>
+                onPress={onPressSignUp}>Create new account? Sign up here.</Text>
 
         </SafeAreaView>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, } from "react";
+import React, { useEffect, useState, } from "react";
 import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from "./styles";
@@ -15,10 +15,12 @@ import { AppState } from "../../../redux/Store/configStore";
 import { getAddedNotes, startRemoveNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 import { resetUserInfo, } from "../../../redux/Actions/UserDataToken";
+import Loader from '../../reuse/CustomLoader';
 
 const Home = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+    const [loading, setLoading] = useState<boolean>(false)
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -68,6 +70,8 @@ const Home = () => {
     // sign out handling
     const onSignOutBtnPress = async () => {
 
+        setLoading(true)
+
         await Alert.alert(
             'NotesApp',
             "Are you sure you want to logout?",
@@ -76,7 +80,8 @@ const Home = () => {
                 }
             }, {
                 text: "Yes", onPress: () => {
-                     dispatch(resetUserInfo())
+                    dispatch(resetUserInfo())
+                    setLoading(false)
                 }
             }
             ],
@@ -125,6 +130,8 @@ const Home = () => {
                     <Text style={styles.txtNoNotesFound}>No Notes Found</Text>
                 </View>
             }
+
+            {loading && <Loader />}
 
             < FloatingAction
                 actions={FABOptions}

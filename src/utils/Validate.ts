@@ -1,4 +1,5 @@
 import Config from './Config';
+import { showFlashMessage } from './Common';
 
 export type addNoteValidationType = {
   noteNameError?: string;
@@ -6,6 +7,27 @@ export type addNoteValidationType = {
   isValid?: boolean;
 
 }
+
+export type signInValidationType = {
+  
+}
+
+export function validateSignIn(currentEmail:string,currentPassword: string) {
+
+  if (currentEmail.length === 0) {
+      showFlashMessage('Please enter your email',"danger")
+      return false
+  }
+
+  if (currentPassword.length === 0) {
+    showFlashMessage('Please enter your password',"danger")
+    return false
+  }
+
+  return true
+}
+
+
 
 export function validateAddNote(notes: string): addNoteValidationType {
 
