@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, Text, ScrollView, TextInput, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";

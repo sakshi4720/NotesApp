@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, } from 'react-native';
 import styles from './styles';
 import LinearGradient from "react-native-linear-gradient";
-import { getIcons } from '../../../../assets/images/icons';
 
 const CustomHeader = ({ headerTitle, isShowingOnBackPress, onBackPress, isShowingSignOut, onSignOutBtnPress }: { headerTitle: string, isShowingOnBackPress: boolean, onBackPress: () => void, isShowingSignOut: boolean, onSignOutBtnPress: () => void }) => {
 
@@ -12,7 +11,7 @@ const CustomHeader = ({ headerTitle, isShowingOnBackPress, onBackPress, isShowin
                 onPress={() => onBackPress && onBackPress()}>
 
                 <Image source={require('../../../../assets/images/ic_back.png/')}
-                    style={{ height: 20, width: 20, tintColor: 'white' }} />
+                    style={styles.backImg} />
 
             </TouchableOpacity>}
             <Text style={styles.headerTitle}>{headerTitle}</Text>
@@ -21,7 +20,7 @@ const CustomHeader = ({ headerTitle, isShowingOnBackPress, onBackPress, isShowin
                 onPress={() => onSignOutBtnPress && onSignOutBtnPress()}>
 
                 <Image source={require('../../../../assets/images/ic_sign_out.png/')}
-                    style={{ height: 28, width: 28, resizeMode: 'contain' ,tintColor:'white'}} />
+                    style={styles.signOutImg} />
 
             </TouchableOpacity>}
         </LinearGradient>

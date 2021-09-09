@@ -21,11 +21,11 @@ export default StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3,
     elevation: 3,
-  
+
   },
   itemMainConatiner: {
     paddingLeft: moderateScale(10),
-   // paddingRight: moderateScale(10),
+    // paddingRight: moderateScale(10),
   },
 
   itemImg: {
@@ -59,6 +59,16 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  copyEditImgContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginBottom: moderateScale(10)
+  },
+  editImg: {
+    height: moderateScale(20),
+    width: moderateScale(20),
+    tintColor: 'white'
   }
 
 })

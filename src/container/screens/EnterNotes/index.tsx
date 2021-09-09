@@ -7,7 +7,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import LinearGradient from "react-native-linear-gradient";
 import { addNoteValidationType, validateAddNote } from "../../../utils/Validate";
-import { getAddedNotes, startAddNotes,  } from "../../../redux/Actions/Notes";
+import { getAddedNotes, startAddNotes, startEditNotes, } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 
 export interface Note {
@@ -77,9 +77,10 @@ const EnterNotes = () => {
                 noteNameError: result.noteNameError,
             });
         }
-        //  const res = await dispatch(startEditNotes(noteId,currentText))
-        //  dispatch(getAddedNotes())
-        // navigation.goBack()
+        const res = await dispatch(startEditNotes(noteId, currentText))
+        setTimeout(() => { dispatch(getAddedNotes()) }, 200)
+
+        navigation.goBack()
     }
 
     // navigate to back screen
@@ -107,7 +108,7 @@ const EnterNotes = () => {
                     <LinearGradient colors={['#ADD8E6', '#728FCE']}
                         style={styles.linearGradient}>
                         <TouchableOpacity style={styles.btnAddContainer}
-                             onPress={isFromEditNotes ? onPressEditNoteBtn : onPressAddNoteBtn}>
+                            onPress={isFromEditNotes ? onPressEditNoteBtn : onPressAddNoteBtn}>
                             <Text style={styles.buttonText}>{isFromEditNotes ? 'Edit' : 'Add'}</Text>
                         </TouchableOpacity>
                     </LinearGradient>

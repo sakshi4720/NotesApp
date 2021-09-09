@@ -30,9 +30,6 @@ const RootNavigator: React.FC<Props> = () => {
     const userToken = useSelector((state: AppState) => state.persistedReducer.token);
     let isTokenAvailable = userToken == undefined ? false : true
 
-    console.log("isToken==", userToken)
-    console.log("isTokenAvailable==", isTokenAvailable)
-
     return (
         <>
 

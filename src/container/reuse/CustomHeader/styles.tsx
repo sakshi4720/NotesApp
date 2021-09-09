@@ -25,15 +25,26 @@ export default StyleSheet.create({
     rightImageContainer: {
         end: moderateScale(15),
         position: 'absolute',
-        height:moderateScale(40),
-        width:moderateScale(40),
-        justifyContent:'center'
+        height: moderateScale(40),
+        width: moderateScale(40),
+        justifyContent: 'center'
     },
-    backIconContainer:{
+    backIconContainer: {
         start: moderateScale(15),
         position: 'absolute',
-        height:moderateScale(40),
-        width:moderateScale(40),
-        justifyContent:'center'
+        height: moderateScale(40),
+        width: moderateScale(40),
+        justifyContent: 'center'
+    },
+    backImg: {
+        height: moderateScale(20),
+        width: moderateScale(20),
+        tintColor: 'white'
+    },
+    signOutImg: {
+        height: moderateScale(28),
+        width: moderateScale(28),
+        resizeMode: 'contain',
+        tintColor: 'white'
     }
 })

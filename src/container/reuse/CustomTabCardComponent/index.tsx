@@ -36,17 +36,17 @@ const CustomTabCardComponent = ({ userNotesObj, onPressEditBtn, onPressCopyBtn }
 
                     </TouchableOpacity>
 
-                    <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: 10 }}>
+                    <View style={styles.copyEditImgContainer}>
                         <TouchableOpacity style={styles.deleteBtnContainer}
                             onPress={onPressEditBtn}>
                             <Image source={require('../../../../assets/images/ic_edit.png')}
-                                style={{ height: 20, width: 20, tintColor: 'white' }} />
+                                style={styles.editImg} />
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.deleteBtnContainer}
                             onPress={onPressCopyBtn} >
                             <Image source={require('../../../../assets/images/ic_copy.png')}
-                                style={{ height: 20, width: 20, tintColor: 'white' }} />
+                                style={styles.editImg} />
                         </TouchableOpacity>
                     </View>
 

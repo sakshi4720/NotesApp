@@ -43,10 +43,10 @@ export interface AddNotesAction {
     note: Note;
 }
 
-// export interface EditNotesAction {
-//     type: typeof EDIT_NOTES;
-//    value:string;
-// }
+export interface EditNotesAction {
+    type: typeof EDIT_NOTES;
+    note: Note;
+}
 
 export interface GetNotesAction {
     type: typeof GET_NOTES;
@@ -60,6 +60,6 @@ export interface RemoveNotesAction {
 
 export type UserTokenAndDataActionTypes = UpdateUserDataAndToken | UpdateUserToken | UpdateUserData | ResetUserInfo
 
-export type NotesActionTypes = AddNotesAction | RemoveNotesAction | GetNotesAction
+export type NotesActionTypes = AddNotesAction | RemoveNotesAction | GetNotesAction | EditNotesAction
 
 export type AppActions = UserTokenAndDataActionTypes | NotesActionTypes

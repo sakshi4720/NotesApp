@@ -1,9 +1,9 @@
 import React, { useEffect, useState, } from "react";
-import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard, Alert } from 'react-native';
+import { TouchableOpacity, Image, Text, View, SafeAreaView, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from "./styles";
 import { RootStackParamList } from "../../../services/RootNavigator";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, } from "@react-navigation/native";
 import { FloatingAction } from 'react-native-floating-action';
 import { getIcons } from '../../../../assets/images/icons'
 import { moderateScale } from "react-native-size-matters";
@@ -22,7 +22,6 @@ import { showFlashMessage } from "../../../utils/Common";
 const Home = () => {
 
     type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
-    const route = useRoute<RouteProp<RootStackParamList, 'Home'>>();
     const navigation = useNavigation<NavigationProp>();
 
     const [loading, setLoading] = useState<boolean>(false)
@@ -97,6 +96,7 @@ const Home = () => {
             "Are you sure you want to logout?",
             [{
                 text: "No", onPress: () => {
+                    setLoading(false)
                 }
             }, {
                 text: "Yes", onPress: () => {

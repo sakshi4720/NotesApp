@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, Text, TextInput, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import { OutlinedTextField, } from 'rn-material-ui-textfield'
 import { getIcons } from "../../../../assets/images/icons";
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import styles from './styles';
 import { showFlashMessage } from '../../../utils/Common';
 import { useDispatch } from "react-redux";
