@@ -21,7 +21,7 @@ const CustomHeader = ({ headerTitle, isShowingOnBackPress, onBackPress, isShowin
                 onPress={() => onSignOutBtnPress && onSignOutBtnPress()}>
 
                 <Image source={require('../../../../assets/images/ic_sign_out.png/')}
-                    style={{ height: 35, width: 35, resizeMode: 'contain' }} />
+                    style={{ height: 28, width: 28, resizeMode: 'contain' ,tintColor:'white'}} />
 
             </TouchableOpacity>}
         </LinearGradient>

@@ -15,7 +15,7 @@ export type RootStackParamList = {
     SignIn: undefined,
     SignUp: undefined,
     Home: undefined,
-    Notes: undefined;
+    Notes: { userNoteObj?: { id: number, value: string } | undefined };
     DetailedNotes: { userNotes: string | undefined };
 };
 
@@ -29,7 +29,7 @@ const RootNavigator: React.FC<Props> = () => {
     const { Navigator, Screen } = RootStack
     const userToken = useSelector((state: AppState) => state.persistedReducer.token);
     let isTokenAvailable = userToken == undefined ? false : true
-    
+
     console.log("isToken==", userToken)
     console.log("isTokenAvailable==", isTokenAvailable)
 

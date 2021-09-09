@@ -3,7 +3,7 @@ import { TouchableOpacity, Image, Text, View, SafeAreaView, FlatList, Keyboard, 
 import { StackNavigationProp } from '@react-navigation/stack';
 import styles from "./styles";
 import { RootStackParamList } from "../../../services/RootNavigator";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { FloatingAction } from 'react-native-floating-action';
 import { getIcons } from '../../../../assets/images/icons'
 import { moderateScale } from "react-native-size-matters";
@@ -16,10 +16,15 @@ import { getAddedNotes, startRemoveNotes } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
 import { resetUserInfo, } from "../../../redux/Actions/UserDataToken";
 import Loader from '../../reuse/CustomLoader';
+import Clipboard from '@react-native-community/clipboard';
+import { showFlashMessage } from "../../../utils/Common";
 
 const Home = () => {
 
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, "Home">>()
+    type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+    const route = useRoute<RouteProp<RootStackParamList, 'Home'>>();
+    const navigation = useNavigation<NavigationProp>();
+
     const [loading, setLoading] = useState<boolean>(false)
 
     const dispatch = useDispatch()
@@ -56,7 +61,9 @@ const Home = () => {
     const onFABPressed = (selectedOption?: string) => {
 
         if (selectedOption === 'Notes') {
-            navigation.navigate("Notes")
+            navigation.navigate('Notes', {
+                userNoteObj: undefined
+            })
             return
         }
 
@@ -65,6 +72,19 @@ const Home = () => {
     //callback for delete operation
     const onPressDeleteBtn = (item: Note, index: number) => {
         dispatch(startRemoveNotes(item.id))
+    }
+
+    ////button for editing notes
+    const onPressEditBtn = (item: Note) => {
+        navigation.navigate('Notes', {
+            userNoteObj: item
+        })
+    }
+
+    //button for copying notes
+    const onPressCopyBtn = (item: Note) => {
+        Clipboard.setString(item.value);
+        showFlashMessage("Note copied to clipboard", "success")
     }
 
     // sign out handling
@@ -92,9 +112,12 @@ const Home = () => {
 
     const renderNotes = ({ item, index }: { item: Note, index: number }) => {
         return (
-            <CustomTabCardComponent userNotesObj={item} />
+            <CustomTabCardComponent userNotesObj={item}
+                onPressCopyBtn={() => onPressCopyBtn(item)}
+                onPressEditBtn={() => onPressEditBtn(item)} />
         )
     }
+
 
     return (
 

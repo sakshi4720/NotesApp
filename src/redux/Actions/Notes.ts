@@ -15,6 +15,11 @@ export const getNotes = (note: Note[]): AppActions => ({
     note
 });
 
+// export const editNotes = (value: string): AppActions => ({
+//     type: "EDIT_NOTES",
+//     value
+// });
+
 export const removeNotes = (id: number): AppActions => ({
     type: "REMOVE_NOTES",
     id
@@ -38,6 +43,23 @@ export const startAddNotes = (value: string) => {
         return { code: 200 }
     }
 }
+
+// export const startEditNotes = (id: number, value: string) => {
+//     return async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+//         const db = firebase.firestore();
+//         var user = firebase.auth().currentUser;
+//         let idDoc = db.collection('myNotes').where('id', '==', id)
+      
+//         db.collection('myNotes').where('id', '==', id).get().then((snapshot) => {
+//             snapshot.docs.forEach(doc => {
+
+//                 console.log('*********note updated************')
+//                 db.collection("myNotes").doc(doc.id).update({value: value});
+//             });
+//         dispatch(editNotes(value))
+//      });
+// }
+// }
 
 
 

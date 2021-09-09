@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SafeAreaView, View, TouchableOpacity, Text, TextInput } from "react-native";
+import { SafeAreaView, View, TouchableOpacity, Text, TextInput, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import { OutlinedTextField, } from 'rn-material-ui-textfield'
@@ -15,6 +15,9 @@ import { RootStackParamList } from "../../../services/RootNavigator";
 import { validateSignIn } from "../../../utils/Validate";
 import Loader from '../../reuse/CustomLoader';
 
+const passwordVisible = require('../../../../assets/images/ic_eye.png')
+const passwordHidden = require('../../../../assets/images/ic_closed_eye.png')
+
 export interface UserTokenInfo {
     token: string | undefined;
 
@@ -27,7 +30,7 @@ const SignIn = () => {
     const [currentEmail, setCurrentEmail] = useState("")
     const [currentPassword, setCurrentPassword] = useState("")
     const [loading, setLoading] = useState<boolean>(false)
-    const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false)
+    const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true)
 
 
     //refs
@@ -129,8 +132,15 @@ const SignIn = () => {
                     title="Choose wisely"
                     maxLength={20}
                     characterRestriction={20}
-                    onAcc
-                 
+                    renderRightAccessory={() => {
+                        return (
+                            <TouchableOpacity onPress={() => { setSecureTextEntry(!secureTextEntry) }}>
+                                <Image source={secureTextEntry ? passwordHidden : passwordVisible}
+                                    style={{ height: 25, width: 25, }} />
+                            </TouchableOpacity>
+                        )
+                    }}
+
                 />
             </View>
 

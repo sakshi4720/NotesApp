@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   itemMainConatiner: {
     paddingLeft: moderateScale(10),
-    paddingRight: moderateScale(10),
+   // paddingRight: moderateScale(10),
   },
 
   itemImg: {

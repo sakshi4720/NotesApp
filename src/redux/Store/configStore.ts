@@ -14,12 +14,16 @@ const persistConfig = {
 
 export const rootReducer = combineReducers({
     
-    persistedReducer: persistReducer(persistConfig, userDataTokenReducer),
+    persistedReducer: userDataTokenReducer,
    // userDataAndToken: userDataTokenReducer,
-    notes: persistReducer(persistConfig, notesReducer),
+    notes: notesReducer
 })
 
 //holds the type of the whole application
 export type AppState = ReturnType<typeof rootReducer>
 
-export const Store = createStore(rootReducer,applyMiddleware(thunk));
+const persistedReducer = persistReducer(persistConfig,rootReducer)
+
+export const Store = createStore(persistedReducer,applyMiddleware(thunk));
+
+export const Persistor = persistStore(Store)
