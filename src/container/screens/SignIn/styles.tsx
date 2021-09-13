@@ -1,25 +1,23 @@
-import { StyleSheet, Dimensions } from "react-native";
-const { height, width } = Dimensions.get('window')
+import { StyleSheet } from "react-native";
 import { moderateScale } from 'react-native-size-matters';
 
 export default StyleSheet.create({
 
     rootMainContainer: {
         flex: 1,
-       
     },
-    rootInnerContainer:{
+    rootInnerContainer: {
         flex: 1,
         marginStart: moderateScale(15),
         marginEnd: moderateScale(15),
-        marginTop:moderateScale(85),
+        marginTop: moderateScale(85),
     },
-    textFieldContainer:{
-        marginTop:moderateScale(20),
+    textFieldContainer: {
+        marginTop: moderateScale(20),
     },
     linearGradient: {
         height: moderateScale(55),
-        width:moderateScale(345),
+        width: moderateScale(345),
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: moderateScale(10),
@@ -27,8 +25,7 @@ export default StyleSheet.create({
         borderColor: 'transparent',
         marginStart: moderateScale(15),
         marginEnd: moderateScale(15),
-       
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     btnAddContainer: {
         width: moderateScale(260),
@@ -36,14 +33,14 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     buttonText: {
-        fontSize: moderateScale(22),
+        fontSize: moderateScale(20),
         textAlign: 'center',
         color: '#ffffff',
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold'
+        fontFamily: 'Montserrat-Regular',
     },
-    txtSignUp:{
-        color:'#728FCE',
+    txtSignUp: {
+        color: '#728FCE',
+        fontFamily: 'Montserrat-Regular',
         textAlign: 'center',
         marginBottom: moderateScale(25),
         marginTop: moderateScale(15),

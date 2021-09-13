@@ -103,7 +103,8 @@ const SignIn = () => {
 
                 <OutlinedTextField
                     containerStyle={{ marginTop: moderateScale(40), }}
-                    textColor={'ADD8E6'}
+                    style={{ fontFamily: 'ProductSans' }}
+                    // textColor={'#ADD8E6'}
                     keyboardType="email-address"
                     autoCapitalize="none"
                     autoCorrect={false}

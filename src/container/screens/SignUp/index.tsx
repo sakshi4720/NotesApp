@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, Text, ScrollView, TextInput, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
@@ -58,18 +58,18 @@ const SignUp = () => {
     const onPressSignInBtn = () => {
 
         if (currentUserName.length === 0) {
-            showFlashMessage('Please enter your username',"danger")
-            return 
+            showFlashMessage('Please enter your username', "danger")
+            return
         }
 
         if (currentEmail.length === 0) {
-            showFlashMessage('Please enter your email',"danger")
-            return 
+            showFlashMessage('Please enter your email', "danger")
+            return
         }
-      
+
         if (currentPassword.length === 0) {
-          showFlashMessage('Please enter your password',"danger")
-          return 
+            showFlashMessage('Please enter your password', "danger")
+            return
         }
 
         setLoading(true)
@@ -113,7 +113,7 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={{ marginTop: moderateScale(40), }}
-                        textColor={'ADD8E6'}
+                        textColor={'#ADD8E6'}
                         inputRef={nameRef}
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -121,7 +121,7 @@ const SignUp = () => {
                         enablesReturnKeyAutomatically={true}
                         onChangeText={onChangeUsername}
                         onSubmitEditing={() => {
-                           emailRef.current?.focus();
+                            emailRef.current?.focus();
                         }}
                         returnKeyType="next"
                         label="Username"
