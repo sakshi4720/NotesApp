@@ -18,8 +18,9 @@ export default StyleSheet.create({
         marginTop: moderateScale(30),
         borderRadius: moderateScale(10),
         borderColor: '#ADD8E6',
-        marginStart: moderateScale(15)
-
+        marginStart: moderateScale(15),
+        fontFamily: 'ProductSans-Bold',
+        fontWeight: 'bold'
 
     },
     txtNotesData: {

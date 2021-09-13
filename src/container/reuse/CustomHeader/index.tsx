@@ -27,4 +27,4 @@ const CustomHeader = ({ headerTitle, isShowingOnBackPress, onBackPress, isShowin
     )
 }
 
-export default CustomHeader;
+export default React.memo(CustomHeader);

@@ -87,19 +87,17 @@ const Home = () => {
     }
 
     // sign out handling
-    const onSignOutBtnPress = async () => {
-
-        setLoading(true)
-
-        await Alert.alert(
+    const onSignOutBtnPress = () => {
+        Alert.alert(
             'NotesApp',
             "Are you sure you want to logout?",
             [{
                 text: "No", onPress: () => {
-                    setLoading(false)
+
                 }
             }, {
                 text: "Yes", onPress: () => {
+                    setLoading(true)
                     dispatch(resetUserInfo())
                     setLoading(false)
                 }
@@ -118,7 +116,6 @@ const Home = () => {
         )
     }
 
-
     return (
 
         <SafeAreaView style={styles.rootMainContainer} >
@@ -127,7 +124,7 @@ const Home = () => {
                 headerTitle={'Home'}
                 isShowingSignOut={true}
                 onBackPress={() => navigation.goBack()}
-                onSignOutBtnPress={() => onSignOutBtnPress()} />
+                onSignOutBtnPress={onSignOutBtnPress} />
             {
                 noteArray.length > 0 ? <SwipeListView
                     style={styles.swiperListViewContainer}
@@ -175,4 +172,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default React.memo(Home);

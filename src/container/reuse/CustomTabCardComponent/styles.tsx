@@ -47,6 +47,7 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: moderateScale(10),
     paddingBottom: moderateScale(10),
+    //fontWeight: 'bold',
 
   },
   deleteBtnContainer: {
