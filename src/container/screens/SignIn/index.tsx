@@ -12,9 +12,9 @@ import { updateUserToken } from "../../../redux/Actions/UserDataToken";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
-import * as ValidateClass from "../../../utils/Validate";
 import Loader from '../../reuse/CustomLoader';
 import Config from "../../../utils/Config";
+import * as Helper from './helper';
 
 const passwordVisible = require('../../../../assets/images/ic_eye.png')
 const passwordHidden = require('../../../../assets/images/ic_closed_eye.png')
@@ -52,29 +52,17 @@ const SignIn = () => {
     }
 
     const onPressSignInBtn = async () => {
-
-        let isValidate = ValidateClass.validateSignIn(currentEmail, currentPassword)
-        if (isValidate) {
-            setLoading(true)
-            try {
-                let response = await auth()
-                    .signInWithEmailAndPassword(currentEmail, currentPassword)
-
-                if (response) {
-                    auth().currentUser?.getIdToken().then(token => {
-                        dispatch(updateUserToken(token));
-                        setLoading(false);
-                        navigation.navigate("Home")
-                        showFlashMessage(Config.strings.signed_in_success, 'success');
-                    })
-                }
-            }
-            catch (error) {
+        setLoading(true);
+        let response = await Helper.onPressSignInBtn(currentEmail, currentPassword)
+        if (response) {
+            auth().currentUser?.getIdToken().then(token => {
+                dispatch(updateUserToken(token));
                 setLoading(false);
-                showFlashMessage(error.message, 'danger');
-            };
-
+                navigation.navigate("Home")
+                showFlashMessage(Config.strings.signed_in_success, 'success');
+            })
         }
+        setLoading(false);
     }
 
     return (

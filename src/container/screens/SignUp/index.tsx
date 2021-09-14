@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, Text, ScrollView, TextInput, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
-import { OutlinedTextField } from 'rn-material-ui-textfield'
+import { OutlinedTextField } from 'rn-material-ui-textfield';
 import { getIcons } from "../../../../assets/images/icons";
 import auth from '@react-native-firebase/auth';
 import styles from './styles';
@@ -13,8 +13,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
 import Loader from '../../reuse/CustomLoader';
-import * as ValidateClass from "../../../utils/Validate";
+import * as Helper from './helper';
 import Config from "../../../utils/Config";
+
 const passwordVisible = require('../../../../assets/images/ic_eye.png')
 const passwordHidden = require('../../../../assets/images/ic_closed_eye.png')
 
@@ -37,7 +38,6 @@ const SignUp = () => {
     const emailRef = useRef<TextInput | null>(null)
     const passwordRef = useRef<TextInput | null>(null)
 
-
     const dispatch = useDispatch()
 
     const onChangeUsername = (text: string) => {
@@ -51,40 +51,29 @@ const SignUp = () => {
     const onChangePassword = (text: string) => {
         setCurrentPassword(text)
     }
+    
     const onPressSignIn = () => {
         navigation.navigate('SignIn')
     }
 
-    const onPressSignInBtn = async () => {
-
-        let isValidate = ValidateClass.validateSignUp(currentUserName, currentEmail, currentPassword)
-        if (isValidate) {
-            setLoading(true)
-            try {
-                let response = await auth()
-                .createUserWithEmailAndPassword(currentEmail, currentPassword)
-                if (response) {
-                    auth().currentUser?.getIdToken().then(token => {
-                        dispatch(updateUserToken(token));
-                        setLoading(false);
-                        navigation.navigate("Home")
-                        showFlashMessage(Config.strings.signed_in_success, 'success');
-                    })
-                }
-            }
-            catch (error) {
+    const onPressSignUpBtn = async () => {
+        setLoading(true);
+        let response = await Helper.onPressSignUpBtn(currentUserName, currentEmail, currentPassword)
+        if (response) {
+            auth().currentUser?.getIdToken().then(token => {
+                dispatch(updateUserToken(token));
                 setLoading(false);
-                showFlashMessage(error.message, 'danger');
-            };
-            
+                navigation.navigate("Home")
+                showFlashMessage(Config.strings.signed_in_success, 'success');
+            })
         }
+        setLoading(false);
     }
 
     return (
         <SafeAreaView style={styles.rootMainContainer}>
 
             <ScrollView>
-
                 <View style={styles.rootInnerContainer}>
                     <TouchableOpacity style={styles.imgLogo}>
                         {getIcons("Logo", moderateScale(200))}
@@ -156,7 +145,7 @@ const SignUp = () => {
                 <LinearGradient colors={Config.colors.HEX_GRADIENT2}
                     style={styles.linearGradient}>
                     <TouchableOpacity style={styles.btnAddContainer}
-                        onPress={onPressSignInBtn}
+                        onPress={onPressSignUpBtn}
                     >
                         <Text style={styles.buttonText}>Sign Up</Text>
                     </TouchableOpacity>
@@ -170,5 +159,4 @@ const SignUp = () => {
         </SafeAreaView>
     )
 }
-
 export default SignUp;
