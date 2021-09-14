@@ -19,8 +19,7 @@ export default StyleSheet.create({
         borderRadius: moderateScale(10),
         borderColor: '#ADD8E6',
         marginStart: moderateScale(15),
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold'
+        fontFamily: 'Montserrat-Bold',
 
     },
     txtNotesData: {
@@ -46,8 +45,7 @@ export default StyleSheet.create({
         fontSize: moderateScale(22),
         textAlign: 'center',
         color: '#ffffff',
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold'
+        fontFamily: 'Montserrat-Regular',
     },
 
     btnAddContainer: {
@@ -66,7 +64,7 @@ export default StyleSheet.create({
         marginTop: moderateScale(20),
         fontSize: moderateScale(22),
         textAlign: 'center',
-        fontFamily: 'ProductSans-Bold',
+        fontFamily: 'Montserrat-Bold',
         fontWeight: 'bold'
     },
     rowBack: {

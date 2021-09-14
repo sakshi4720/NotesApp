@@ -18,8 +18,7 @@ export default StyleSheet.create({
     headerTitle: {
         color: 'white',
         fontSize: moderateScale(20),
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat-Bold',
 
     },
     rightImageContainer: {

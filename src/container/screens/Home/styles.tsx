@@ -20,14 +20,14 @@ export default StyleSheet.create({
     },
     txtTitle: {
         fontSize: moderateScale(18),
-        fontFamily: 'ProductSans-BoldItalic'
+        fontFamily: 'Montserrat-Bold',
     },
     txtNoNotesFound: {
         marginTop: moderateScale(20),
         fontSize: moderateScale(22),
         textAlign: 'center',
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold'
+        fontFamily: 'Montserrat-Bold',
+        
     },
     rowBack: {
         alignItems: 'center',

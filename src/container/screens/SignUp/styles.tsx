@@ -39,13 +39,13 @@ export default StyleSheet.create({
         fontSize: moderateScale(22),
         textAlign: 'center',
         color: '#ffffff',
-        fontFamily: 'ProductSans-Bold',
-        fontWeight: 'bold'
+        fontFamily: 'Montserrat-Regular',
     },
     txtSignIn:{
         color:'#728FCE',
         textAlign: 'center',
         marginBottom: moderateScale(25),
         marginTop: moderateScale(15),
+        fontFamily: 'Montserrat-Regular',
     }
 })

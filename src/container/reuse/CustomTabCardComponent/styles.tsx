@@ -43,12 +43,11 @@ export default StyleSheet.create({
     fontSize: moderateScale(16),
     color: 'white',
     lineHeight: moderateScale(25),
-    fontFamily: 'ProductSans-Bold',
+    fontFamily: 'Montserrat-Regular',
     flex: 1,
     paddingTop: moderateScale(10),
     paddingBottom: moderateScale(10),
-    //fontWeight: 'bold',
-
+    
   },
   deleteBtnContainer: {
     flexDirection: 'row',

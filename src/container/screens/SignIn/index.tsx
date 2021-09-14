@@ -103,7 +103,7 @@ const SignIn = () => {
 
                 <OutlinedTextField
                     containerStyle={{ marginTop: moderateScale(40), }}
-                    style={{ fontFamily: 'ProductSans' }}
+                    style={{ fontFamily: 'Montserrat-Regular' }}
                     // textColor={'#ADD8E6'}
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -122,6 +122,7 @@ const SignIn = () => {
                 <OutlinedTextField
                     containerStyle={styles.textFieldContainer}
                     inputRef={passwordRef}
+                    style={{  fontFamily: 'Montserrat-Regular'}}
                     secureTextEntry={secureTextEntry}
                     autoCapitalize="none"
                     autoCorrect={false}

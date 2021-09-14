@@ -113,7 +113,7 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={{ marginTop: moderateScale(40), }}
-                        textColor={'#ADD8E6'}
+                        style={{  fontFamily: 'Montserrat-Regular' }}
                         inputRef={nameRef}
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -130,8 +130,8 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={styles.textFieldContainer}
-                        inputRef={emailRef}
-                        textColor={'ADD8E6'}
+                        style={{  fontFamily: 'Montserrat-Regular' }}
+                        inputRef={emailRef} 
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -147,8 +147,9 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={styles.textFieldContainer}
+                        style={{  fontFamily: 'Montserrat-Regular' }}
                         inputRef={passwordRef}
-                        secureTextEntry={true}
+                        secureTextEntry={secureTextEntry}
                         autoCapitalize="none"
                         autoCorrect={false}
                         enablesReturnKeyAutomatically={true}
