@@ -1,5 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
-const { height, width } = Dimensions.get('window')
+import { StyleSheet, } from "react-native";
 import { moderateScale } from 'react-native-size-matters';
 
 export default StyleSheet.create({
@@ -47,5 +46,14 @@ export default StyleSheet.create({
         marginBottom: moderateScale(25),
         marginTop: moderateScale(15),
         fontFamily: 'Montserrat-Regular',
+    },
+    imgLogo: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    imgEye:{
+        height: moderateScale(25),
+        width: moderateScale(25),
     }
 })

@@ -4,7 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { moderateScale } from "react-native-size-matters";
 import { OutlinedTextField } from 'rn-material-ui-textfield'
 import { getIcons } from "../../../../assets/images/icons";
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import styles from './styles';
 import { showFlashMessage } from '../../../utils/Common';
 import { useDispatch } from "react-redux";
@@ -13,13 +13,13 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
 import Loader from '../../reuse/CustomLoader';
-
+import * as ValidateClass from "../../../utils/Validate";
+import Config from "../../../utils/Config";
 const passwordVisible = require('../../../../assets/images/ic_eye.png')
 const passwordHidden = require('../../../../assets/images/ic_closed_eye.png')
 
 export interface UserTokenInfo {
     token: string | undefined;
-
 }
 
 const SignUp = () => {
@@ -55,50 +55,29 @@ const SignUp = () => {
         navigation.navigate('SignIn')
     }
 
-    const onPressSignInBtn = () => {
+    const onPressSignInBtn = async () => {
 
-        if (currentUserName.length === 0) {
-            showFlashMessage('Please enter your username', "danger")
-            return
-        }
-
-        if (currentEmail.length === 0) {
-            showFlashMessage('Please enter your email', "danger")
-            return
-        }
-
-        if (currentPassword.length === 0) {
-            showFlashMessage('Please enter your password', "danger")
-            return
-        }
-
-        setLoading(true)
-        auth()
-            .createUserWithEmailAndPassword(currentEmail, currentPassword)
-            .then((res) => {
-                if (res) {
+        let isValidate = ValidateClass.validateSignUp(currentUserName, currentEmail, currentPassword)
+        if (isValidate) {
+            setLoading(true)
+            try {
+                let response = await auth()
+                .createUserWithEmailAndPassword(currentEmail, currentPassword)
+                if (response) {
                     auth().currentUser?.getIdToken().then(token => {
                         dispatch(updateUserToken(token));
-                        setLoading(false)
+                        setLoading(false);
                         navigation.navigate("Home")
-                        showFlashMessage('User account created & signed in!', 'success');
+                        showFlashMessage(Config.strings.signed_in_success, 'success');
                     })
                 }
-            })
-            .catch(error => {
-                setLoading(false)
-                if (error.code === 'auth/email-already-in-use') {
-                    showFlashMessage('That email address is already in use!', 'warning');
-                    return
-                }
-
-                if (error.code === 'auth/invalid-email') {
-                    showFlashMessage('That email address is invalid!', 'danger');
-                    return
-                }
-
+            }
+            catch (error) {
+                setLoading(false);
                 showFlashMessage(error.message, 'danger');
-            });
+            };
+            
+        }
     }
 
     return (
@@ -107,13 +86,13 @@ const SignUp = () => {
             <ScrollView>
 
                 <View style={styles.rootInnerContainer}>
-                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
+                    <TouchableOpacity style={styles.imgLogo}>
                         {getIcons("Logo", moderateScale(200))}
                     </TouchableOpacity>
 
                     <OutlinedTextField
                         containerStyle={{ marginTop: moderateScale(40), }}
-                        style={{  fontFamily: 'Montserrat-Regular' }}
+                        style={{ fontFamily: 'Montserrat-Regular' }}
                         inputRef={nameRef}
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -130,8 +109,8 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={styles.textFieldContainer}
-                        style={{  fontFamily: 'Montserrat-Regular' }}
-                        inputRef={emailRef} 
+                        style={{ fontFamily: 'Montserrat-Regular' }}
+                        inputRef={emailRef}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -147,7 +126,7 @@ const SignUp = () => {
 
                     <OutlinedTextField
                         containerStyle={styles.textFieldContainer}
-                        style={{  fontFamily: 'Montserrat-Regular' }}
+                        style={{ fontFamily: 'Montserrat-Regular' }}
                         inputRef={passwordRef}
                         secureTextEntry={secureTextEntry}
                         autoCapitalize="none"
@@ -164,7 +143,7 @@ const SignUp = () => {
                             return (
                                 <TouchableOpacity onPress={() => { setSecureTextEntry(!secureTextEntry) }}>
                                     <Image source={secureTextEntry ? passwordHidden : passwordVisible}
-                                        style={{ height: 25, width: 25, }} />
+                                        style={styles.imgEye} />
                                 </TouchableOpacity>
                             )
                         }}
@@ -174,7 +153,7 @@ const SignUp = () => {
 
                 {loading && <Loader />}
 
-                <LinearGradient colors={['#ADD8E6', '#728FCE']}
+                <LinearGradient colors={Config.colors.HEX_GRADIENT2}
                     style={styles.linearGradient}>
                     <TouchableOpacity style={styles.btnAddContainer}
                         onPress={onPressSignInBtn}
@@ -184,7 +163,7 @@ const SignUp = () => {
                 </LinearGradient>
 
                 <Text style={styles.txtSignIn}
-                    onPress={onPressSignIn}>Already have an account? Sign In here.</Text>
+                    onPress={onPressSignIn}>{Config.strings.signIn_text}</Text>
 
             </ScrollView>
 

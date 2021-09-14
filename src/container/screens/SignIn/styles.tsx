@@ -44,5 +44,14 @@ export default StyleSheet.create({
         textAlign: 'center',
         marginBottom: moderateScale(25),
         marginTop: moderateScale(15),
+    },
+    imgLogo: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    imgEye:{
+        height: moderateScale(25),
+        width: moderateScale(25),
     }
 })

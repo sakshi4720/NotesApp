@@ -9,6 +9,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { addNoteValidationType, validateAddNote } from "../../../utils/Validate";
 import { getAddedNotes, startAddNotes, startEditNotes, } from "../../../redux/Actions/Notes";
 import Header from '../../reuse/CustomHeader';
+import Config from "../../../utils/Config";
 
 export interface Note {
     id: number;
@@ -98,7 +99,7 @@ const EnterNotes = () => {
                     onSignOutBtnPress={() => { }}
                 />
                 <TextInput style={styles.txtInputContainer}
-                    placeholder={'Enter your text here...'}
+                    placeholder={Config.strings.textinput_placeholder_text_for_notes}
                     multiline={true}
                     textAlignVertical={'top'}
                     value={currentText}

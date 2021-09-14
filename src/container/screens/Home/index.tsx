@@ -18,6 +18,8 @@ import { resetUserInfo, } from "../../../redux/Actions/UserDataToken";
 import Loader from '../../reuse/CustomLoader';
 import Clipboard from '@react-native-community/clipboard';
 import { showFlashMessage } from "../../../utils/Common";
+import { showAlert } from "../../../utils/AlertHelper";
+import Config from "../../../utils/Config";
 
 const Home = () => {
 
@@ -69,7 +71,7 @@ const Home = () => {
     }
 
     //callback for delete operation
-    const onPressDeleteBtn = (item: Note, index: number) => {
+    const onPressDeleteBtn = (item: Note) => {
         dispatch(startRemoveNotes(item.id))
     }
 
@@ -83,32 +85,24 @@ const Home = () => {
     //button for copying notes
     const onPressCopyBtn = (item: Note) => {
         Clipboard.setString(item.value);
-        showFlashMessage("Note copied to clipboard", "success")
+        showFlashMessage(Config.strings.note_copied_to_clipboard, "success")
     }
 
     // sign out handling
-    const onSignOutBtnPress = () => {
-        Alert.alert(
-            'NotesApp',
-            "Are you sure you want to logout?",
-            [{
-                text: "No", onPress: () => {
+    const onSignOutBtnPress = async () => {
 
-                }
-            }, {
-                text: "Yes", onPress: () => {
-                    setLoading(true)
-                    dispatch(resetUserInfo())
-                    setLoading(false)
-                }
-            }
-            ],
-            { cancelable: false }
-        );
+        const res = await showAlert("NotesApp",
+            Config.strings.logout_confirmation, true, "Yes", "No")
+        if (res != 1)
+            return
+
+        setLoading(true)
+        dispatch(resetUserInfo())
+        setLoading(false)
 
     }
 
-    const renderNotes = ({ item, index }: { item: Note, index: number }) => {
+    const renderNotes = ({ item, }: { item: Note, }) => {
         return (
             <CustomTabCardComponent userNotesObj={item}
                 onPressCopyBtn={() => onPressCopyBtn(item)}
@@ -131,10 +125,10 @@ const Home = () => {
                     data={noteArray}
                     renderItem={renderNotes}
                     keyExtractor={(item) => item.id.toString()}
-                    renderHiddenItem={(data, rowMap) => (
+                    renderHiddenItem={(data,) => (
                         <View style={styles.rowBack}>
                             <TouchableOpacity style={styles.deleteBtnContainer}
-                                onPress={() => onPressDeleteBtn(data.item, data.index)}
+                                onPress={() => onPressDeleteBtn(data.item)}
                             >
                                 <Image source={require('../../../../assets/images/icon_delete_red.png')}
                                     style={styles.deleteIcon} />

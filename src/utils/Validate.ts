@@ -8,24 +8,41 @@ export type addNoteValidationType = {
 
 }
 
-export type signInValidationType = {
-  
-}
-
-export function validateSignIn(currentEmail:string,currentPassword: string) {
+export function validateSignIn(currentEmail: string, currentPassword: string) {
 
   if (currentEmail.length === 0) {
-      showFlashMessage('Please enter your email',"danger")
-      return false
+    showFlashMessage('Please enter your email', "danger")
+    return false
   }
 
   if (currentPassword.length === 0) {
-    showFlashMessage('Please enter your password',"danger")
+    showFlashMessage('Please enter your password', "danger")
     return false
   }
 
   return true
 }
+
+export function validateSignUp(currentUserName: string, currentEmail: string, currentPassword: string) {
+
+  if (currentUserName.length === 0) {
+    showFlashMessage('Please enter your username', "danger")
+    return
+  }
+
+  if (currentEmail.length === 0) {
+    showFlashMessage('Please enter your email', "danger")
+    return false
+  }
+
+  if (currentPassword.length === 0) {
+    showFlashMessage('Please enter your password', "danger")
+    return false
+  }
+
+  return true
+}
+
 
 
 

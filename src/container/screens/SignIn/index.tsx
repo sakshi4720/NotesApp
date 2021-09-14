@@ -12,19 +12,18 @@ import { updateUserToken } from "../../../redux/Actions/UserDataToken";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../services/RootNavigator";
-import { validateSignIn } from "../../../utils/Validate";
+import * as ValidateClass from "../../../utils/Validate";
 import Loader from '../../reuse/CustomLoader';
+import Config from "../../../utils/Config";
 
 const passwordVisible = require('../../../../assets/images/ic_eye.png')
 const passwordHidden = require('../../../../assets/images/ic_closed_eye.png')
 
 export interface UserTokenInfo {
     token: string | undefined;
-
 }
 
 const SignIn = () => {
-
     const navigation = useNavigation<StackNavigationProp<RootStackParamList, "SignIn">>()
 
     const [currentEmail, setCurrentEmail] = useState("")
@@ -52,59 +51,43 @@ const SignIn = () => {
         navigation.navigate('SignUp')
     }
 
-    const onPressSignInBtn = () => {
+    const onPressSignInBtn = async () => {
 
-        if (currentEmail.length === 0) {
-            showFlashMessage('Please enter your email', "danger")
-            return
-        }
+        let isValidate = ValidateClass.validateSignIn(currentEmail, currentPassword)
+        if (isValidate) {
+            setLoading(true)
+            try {
+                let response = await auth()
+                    .signInWithEmailAndPassword(currentEmail, currentPassword)
 
-        if (currentPassword.length === 0) {
-            showFlashMessage('Please enter your password', "danger")
-            return
-        }
-
-        setLoading(true)
-        auth()
-            .signInWithEmailAndPassword(currentEmail, currentPassword)
-            .then((res) => {
-                if (res) {
+                if (response) {
                     auth().currentUser?.getIdToken().then(token => {
                         dispatch(updateUserToken(token));
                         setLoading(false);
                         navigation.navigate("Home")
-                        showFlashMessage('User account created & signed in!', 'success');
+                        showFlashMessage(Config.strings.signed_in_success, 'success');
                     })
                 }
-            })
-            .catch(error => {
+            }
+            catch (error) {
                 setLoading(false);
-                if (error.code === 'auth/email-already-in-use') {
-                    showFlashMessage('That email address is already in use!', 'warning');
-                    return
-                }
-
-                if (error.code === 'auth/invalid-email') {
-                    showFlashMessage('That email address is invalid!', 'danger');
-                    return
-                }
                 showFlashMessage(error.message, 'danger');
-            });
+            };
 
+        }
     }
 
     return (
         <SafeAreaView style={styles.rootMainContainer}>
 
             <View style={styles.rootInnerContainer}>
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
+                <TouchableOpacity style={styles.imgLogo}>
                     {getIcons("Logo", moderateScale(200))}
                 </TouchableOpacity>
 
                 <OutlinedTextField
                     containerStyle={{ marginTop: moderateScale(40), }}
                     style={{ fontFamily: 'Montserrat-Regular' }}
-                    // textColor={'#ADD8E6'}
                     keyboardType="email-address"
                     autoCapitalize="none"
                     autoCorrect={false}
@@ -122,7 +105,7 @@ const SignIn = () => {
                 <OutlinedTextField
                     containerStyle={styles.textFieldContainer}
                     inputRef={passwordRef}
-                    style={{  fontFamily: 'Montserrat-Regular'}}
+                    style={{ fontFamily: 'Montserrat-Regular' }}
                     secureTextEntry={secureTextEntry}
                     autoCapitalize="none"
                     autoCorrect={false}
@@ -138,7 +121,7 @@ const SignIn = () => {
                         return (
                             <TouchableOpacity onPress={() => { setSecureTextEntry(!secureTextEntry) }}>
                                 <Image source={secureTextEntry ? passwordHidden : passwordVisible}
-                                    style={{ height: 25, width: 25, }} />
+                                    style={styles.imgEye} />
                             </TouchableOpacity>
                         )
                     }}
@@ -148,7 +131,7 @@ const SignIn = () => {
 
             {loading && <Loader />}
 
-            <LinearGradient colors={['#ADD8E6', '#728FCE']}
+            <LinearGradient colors={Config.colors.HEX_GRADIENT2}
                 style={styles.linearGradient}>
                 <TouchableOpacity style={styles.btnAddContainer}
                     onPress={onPressSignInBtn}
@@ -158,7 +141,7 @@ const SignIn = () => {
             </LinearGradient>
 
             <Text style={styles.txtSignUp}
-                onPress={onPressSignUp}>Create new account? Sign up here.</Text>
+                onPress={onPressSignUp}>{Config.strings.signUp_text}</Text>
 
         </SafeAreaView>
     )

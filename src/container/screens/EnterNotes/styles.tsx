@@ -19,7 +19,7 @@ export default StyleSheet.create({
         borderRadius: moderateScale(10),
         borderColor: '#ADD8E6',
         marginStart: moderateScale(15),
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'Montserrat-Regular',
 
     },
     txtNotesData: {
